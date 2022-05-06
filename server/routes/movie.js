@@ -119,19 +119,33 @@ module.exports = {
 
         readFile(data => {
 
-            // update the movie
-            const movieId = req.params["id"]; // id? 
-            if (data[movieId])
-                data[movieId] = req.body;
-                // what to do with the actors? 
+            //const jsonData = (data == '') ? JSON.parse("{}") : JSON.parse(data);
 
-            else res.sendStatus(400);
+            // get the movie
+            const movieId = req.params.movie_id; 
+            if (!data[movieId])
+                res.status(400).send(`movie id:${movieId}  not found`);
 
+            const details = req.body.movieDetails;
+            const db = data[movieId];
+            const movie_details = {
+                "id?": movieId,
+                "name": (details.name) ? details.name : db.name,
+                "picture" : (details.picture) ? details.picture : db.picture,
+                "director": (details.director) ? details.director : db.director,
+                "date": (details.date) ? details.date : db.date,
+                "rating": (details.rating) ? details.rating : db.rating,
+                "isSeries": (details.isSeries) ? details.isSeries : db.isSeries,
+                "series_details":(details.series_details) ? details.series_details : db.series_details,
+                "actors": data[movieId].actors
+                };
+            data[movieId] = movie_details;
+                
             writeFile(JSON.stringify(data, null, 2), () => {
                 res.status(200).send(`moives id:${movieId} updated`);
             });
-        },
-            true);
+
+        }, true);
     },
 
     // UPDATE
@@ -139,25 +153,47 @@ module.exports = {
 
         readFile(data => {
 
-            // add the new movie
-            const movieId = req.params["id"]; // id? 
-            if (data[movieId])
-            {
-                const actorsArray = data[movieId].actors; 
-                const actorName = req.params["name"]; // name? 
-                if (!actorsArray[actorName])
-                    res.sendStatus(400);
-                else
-                    actorsArray[actorName].push(req.body);
-                
-            }
-            else res.sendStatus(400);
+            //const jsonData = (data == '') ? JSON.parse("{}") : JSON.parse(data);
 
+            // get the movie
+            const movieId = req.params.movie_id; 
+            if (!data[movieId])
+                res.status(400).send(`movie id:${movieId}  not found`);
+
+            const details = req.body.actorDetails;
+            const db = data[movieId];
+
+            const found = false;
+            let actor = db.actors[details.name];
+            if (!actor)
+            {
+                db.actors[details.name] = {"name?": details.name,
+                "picture": details.picture,
+                "site": details.site};
+            }
+            else
+            {
+                res.status(400).send(`movie id:${movieId}  not found`);
+            }
+            
+            const movie_details = {
+                "id?": movieId,
+                "name": db.name,
+                "picture" : db.picture,
+                "director": db.director,
+                "date": db.date,
+                "rating": db.rating,
+                "isSeries": db.isSeries,
+                "series_details": db.series_details,
+                "actors": data[movieId].actors
+                };
+            data[movieId] = movie_details;
+                
             writeFile(JSON.stringify(data, null, 2), () => {
-                res.status(200).send(`moives id:${movieId} updated with actor: ${actorName}`);
+                res.status(200).send(`actor:${details.name} in moives id:${movieId} updated`);
             });
-        },
-            true);
+
+        }, true);
     },
 
     // DELETE

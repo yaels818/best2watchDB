@@ -7,10 +7,10 @@ var router = express.Router();
 router.get('/list', movieRoutes.getMovies);
 router.get('/list/:movie_id', movieRoutes.getMovie);
 router.post('/movie', movieRoutes.CreateMovie);
-router.put('/movie/:id', movieRoutes.updateMovie);
-router.put('/actor/:id', movieRoutes.AddActorToMovie);
-router.delete('/movie/:id', movieRoutes.deleteMovie);
-router.delete('/actor/:id', movieRoutes.deleteActorFromMovie);
+router.put('/movie/:movie_id', movieRoutes.updateMovie);
+router.put('/actor/:movie_id', movieRoutes.AddActorToMovie);
+router.delete('/movie/:movie_id', movieRoutes.deleteMovie);
+router.delete('/actor/:movie_id', movieRoutes.deleteActorFromMovie);
 
 module.exports = router;
 
