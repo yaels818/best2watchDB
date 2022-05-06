@@ -1,0 +1,82 @@
+{
+  "Movie_ID": {
+    "id?": "Movie_ID",
+    "name": "movie name",
+    "picture": "url",
+    "director": "director name",
+    "date": "01-10-2021",
+    "rating": 5,
+    "isSeries": true,
+    "series_details": [
+      10,
+      12,
+      13
+    ],
+    "actors": {
+      "actor_1_name": {
+        "name?": "actor_1_name",
+        "picture": "url",
+        "site": "url"
+      },
+      "actor_2_name": {
+        "name?": "actor_2_name",
+        "picture": "url",
+        "site": "url"
+      }
+    }
+  },
+  "Movie_ID2": {
+    "id?": "Movie_ID2",
+    "name": "movie name2",
+    "picture": "url2",
+    "director": "director name2",
+    "date": "01-10-2022",
+    "rating": 2,
+    "isSeries": true,
+    "series_details": [
+      12,
+      12,
+      12
+    ],
+    "actors": {
+      "actor_1_name2": {
+        "name?": "actor_1_name2",
+        "picture": "url",
+        "site": "url"
+      },
+      "actor_2_name2": {
+        "name?": "actor_2_name2",
+        "picture": "url",
+        "site": "url"
+      }
+    }
+  },
+  "linoy_id": {
+    "id?": "linoy_id",
+    "name": "movie_linoy",
+    "picture": "some_url",
+    "director": "director_name",
+    "date": "10-10-2022",
+    "rating": 2,
+    "isSeries": true,
+    "series_details": [
+      12,
+      17
+    ],
+    "actors": {}
+  },
+  "linoy_id2": {
+    "id?": "linoy_id2",
+    "name": "movie_linoy",
+    "picture": "some_url",
+    "director": "director_name",
+    "date": "10-10-2022",
+    "rating": 2,
+    "isSeries": true,
+    "series_details": [
+      12,
+      17
+    ],
+    "actors": {}
+  }
+}
