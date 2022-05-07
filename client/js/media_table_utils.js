@@ -15,6 +15,17 @@ $(document).ready(function () {
         ]
     });
 
+    $.ajax({
+        url: "/GetList",
+        success: function (result) {
+            fillTable(result);
+          console.log(result);
+        },
+        error: function (err) {
+          console.log("err", err);
+        }
+      });
+
     /*
     var table = document.getElementById("listMediaTB");
     var tr = document.createElement('tr');
@@ -31,8 +42,9 @@ $(document).ready(function () {
 function fillTable(xml)
 {
     // Javascript function JSON.parse to parse JSON data
-    const jsonObj = JSON.parse(xml.responseText);
-    
+    //const jsonObj = JSON.parse(xml.responseText);
+    const jsonObj = xml;
+
     console.log(jsonObj);
     
     var table = document.getElementById("listMediaTB");

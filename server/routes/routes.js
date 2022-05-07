@@ -4,7 +4,7 @@ movieRoutes = require('./movie');
 var router = express.Router();
 
 
-router.get('/list', movieRoutes.getMovies);
+router.get('/GetList', movieRoutes.getMovies);
 router.get('/list/:movie_id', movieRoutes.getMovie);
 router.post('/movie', movieRoutes.CreateMovie);
 router.put('/movie/:movie_id', movieRoutes.updateMovie);
