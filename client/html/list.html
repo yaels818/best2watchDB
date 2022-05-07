@@ -1,0 +1,33 @@
+<!-- index.html -->
+<!doctype html>
+<html>
+<head>
+    <title>List of All Media</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel = "stylesheet" href="./css/style.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><!-- load jquery via CDN -->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="/js/media_table_utils.js"></script> <!-- load our javascript file -->
+</head>
+
+<body>
+    <div class = "container">
+        <button id = "addMedia_btn_1" class = "button" onclick="">Add Media</button>
+        <br>
+        <table id = "listMediaTB", class = "display">
+            <thead>
+                <tr>
+                    <th>Media-ID</th>
+                    <th>Name</th>
+                    <th>Picture</th>
+                    <th>Rating</th>
+                    <th>Release Date</th>
+                </tr>
+            </thead>
+        </table>
+        <button id = "addMedia_btn_2" class = "button" onclick="">Add Media</button>
+    </div>
+</body>
+
+</html>
