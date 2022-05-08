@@ -5,6 +5,8 @@ html {
 }
 
 body {
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
     font-size: 15px;
@@ -23,39 +25,50 @@ button {
     font-weight: bold;
 }
 
+button:hover {background-color: #00a8a8;}
+
 /*
 #addMedia_btn_1{
-    position:absolute;
+    position: absolute;
     transition: .5s ease;
-    top: 0%;
+    top: 1%;
     left: 40%;
-    right: 40%;
+    
+}
+
+#addMedia_btn_2{
+    position: absolute;
+    transition: .5s ease;
+    bottom: 1%;
+    left: 40%;
 }
 */
 
-button:hover {background-color: #00a8a8;}
-
 #listMediaTB {
-    /*width: auto;*/
+    width: auto;
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
     font-size: 15px;
+    padding: 2%;
     /*
     padding-left: 5%;
     padding-right: 5%;
+    
     position:absolute;
     transition: .5s ease;
-    top: 30%;
+    left: 25%;
+    right: 25%;
     */
 }
-
 
 th {
     background-color: #0C6980;
     padding: 10px;
-    font-size: 15px;
+    font-size: 20px;
     color: white;
 }
+
+tr:hover {background-color: #88ca5e;}
 
 img {
     width:100px;

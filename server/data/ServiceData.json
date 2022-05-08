@@ -1,8 +1,8 @@
 {
-  "Movie_ID": {
-    "id?": "Movie_ID",
-    "name": "movie name",
-    "picture": "url",
+  "Cinderella": {
+    "id?": "001",
+    "name": "Cinderella",
+    "picture": "https://blog.meshagency.com/wp-content/uploads/2015/07/Party-Minions1.jpg",
     "director": "director name",
     "date": "01-10-2021",
     "rating": 5,
@@ -25,9 +25,9 @@
       }
     }
   },
-  "Movie_ID2": {
-    "id?": "Movie_ID2",
-    "name": "movie name2",
+  "Snow_White": {
+    "id?": "002",
+    "name": "Snow White",
     "picture": "url2",
     "director": "director name2",
     "date": "01-10-2022",
@@ -51,9 +51,9 @@
       }
     }
   },
-  "linoy_id": {
-    "id?": "linoy_id",
-    "name": "movie_linoy",
+  "The_Little_Mermaid": {
+    "id?": "003",
+    "name": "The Little Mermaid",
     "picture": "some_url",
     "director": "director_name",
     "date": "10-10-2022",
@@ -65,9 +65,23 @@
     ],
     "actors": {}
   },
-  "linoy_id2": {
-    "id?": "linoy_id2",
-    "name": "movie_linoy",
+  "Mulan": {
+    "id?": "004",
+    "name": "Mulan",
+    "picture": "some_url",
+    "director": "director_name",
+    "date": "10-10-2022",
+    "rating": 2,
+    "isSeries": true,
+    "series_details": [
+      12,
+      17
+    ],
+    "actors": {}
+  },
+  "Pocahontas": {
+    "id?": "005",
+    "name": "Pocahontas",
     "picture": "some_url",
     "director": "director_name",
     "date": "10-10-2022",
