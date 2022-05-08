@@ -10,8 +10,8 @@ const app = express();
 
 app.use('/main', express.static(path.join(__dirname, 'client/html/index.html')));
 app.use('/list_users', express.static(path.join(__dirname, 'client/html/index.html')));
-app.use('/add_user', express.static(path.join(__dirname, 'client/html/add_user_form.html')));
-app.use('/list', express.static(path.join(__dirname, 'client/html/list.html')));
+app.use('/add_media', express.static(path.join(__dirname, 'client/html/add_media_form.html')));
+app.use('/list', express.static(path.join(__dirname, 'client/html/media_list.html')));
 
 app.use('/js', express.static(path.join(__dirname, 'client/js')));
 app.use('/css', express.static(path.join(__dirname, 'client/css')));

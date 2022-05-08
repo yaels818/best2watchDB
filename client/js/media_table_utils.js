@@ -1,5 +1,3 @@
-const dataPath = '././server/data/dataMediaDB.json';
-
 $(document).ready(function () {
 
     $.ajax({
@@ -24,7 +22,7 @@ function fillTable(xml)
     var table = document.getElementById("listMediaTB");
 
     jsonObj.forEach(function(object) {
-        
+
         var tr = document.createElement('tr');
         tr.innerHTML =  '<td>' + object["id?"] + '</td>' +
                         '<td>' + object["name"] + '</td>' +

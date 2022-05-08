@@ -1,0 +1,102 @@
+<!-- index.html -->
+<!doctype html>
+<html>
+<head>
+    <title>Add Media</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel = "stylesheet" href="./css/style.css">
+    <!-- load bootstrap via CDN -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
+    "></script> <!-- load jquery via CDN -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="/js/add_media_utils.js">
+    </script> <!-- load our javascript file -->
+</head>
+
+<body>
+    <div class="col-sm-6 col-sm-offset-3">
+
+        <h1>Add New Media</h1>
+
+        <!-- OUR FORM -->
+        <form id="media_form" name="media_form" method="POST">
+
+            <!-- Media_ID -->
+            <div id="name-group" class="form-group">
+                <label for="id">Media ID</label>
+                <input type="text" class="form-control" name="id_field" id="id_field" placeholder="Write Media ID here..."
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- Media Name -->
+            <div id="name-group" class="form-group">
+                <label for="name">Media Name</label>
+                <input type="text" class="form-control" name="name_field" id="name_field" placeholder="Write Media Name here..."
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- Picture URL -->
+            <div id="name-group" class="form-group">
+                <label for="picture">Picture</label>
+                <input type="text" class="form-control" name="pic_url_field" id="pic_url_field" placeholder="Write Media Picture URL here..."
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- Director Name -->
+            <div id="name-group" class="form-group">
+                <label for="director">Director Name</label>
+                <input type="text" class="form-control" name="director_field" id="director_field" placeholder="Write Director Name here..."
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- Release Date -->
+            <div id="name-group" class="form-group">
+                <label for="release_date">Release Date</label>
+                <input type="date" class="form-control" name="date_field" id="date_field" placeholder="Write Release Date here..."
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- Rating -->
+            <div id="name-group" class="form-group">
+                <label for="rating">Rating</label>
+                <input type="number" class="form-control" name="rating_field" id="rating_field" placeholder="Write Rating here (1 = meh, 5 = awesome)"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- is_Series -->
+            <div id="name-group" class="form-group">
+                <label for="is_series">Is this a series?</label>
+                <input type="checkbox" class="form-control" name="is_series_field" id="is_series_field" required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- Seasons -->
+            <div id="name-group" class="form-group">
+                <label for="seasons">How many seasons?</label>
+                <input type="number" class="form-control" name="seasons_field" id="seasons_field"
+                    placeholder="Write number of seasons here...">
+                <!-- errors will go here -->
+            </div>
+
+            <!-- Episodes -->
+            <div id="name-group" class="form-group">
+                <label for="episodes">How many episodes in each season?</label>
+                <input type="number" class="form-control" name="episodes_field" id="episodes_field"
+                    placeholder="Write number of episodes here...">
+                <!-- errors will go here -->
+            </div>
+
+            <button id="submit_btn" type="submit" class="button">Submit <span class="fa fa-arrow-right"></span></button>
+
+        </form>
+
+    </div>
+</body>
+
+</html>

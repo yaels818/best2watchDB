@@ -75,39 +75,17 @@ img {
     height:100px
 }
 
-#btnsTB {
-    position:absolute;
-    transition: .5s ease;
-    top: 10%;
-    left: 40%;
-    right: 40%;
+#media_form {
+    font-family:'Lucida Sans', Verdana, sans-serif;
 }
 
-#my_name {
-    position:absolute;
-    transition: .5s ease;
-    top: 10%;
-    right: 80%;
-}
-
-#current_date {
-    position:absolute;
-    transition: .5s ease;
-    top: 10%;
-    left: 80%;
-}
-
-h1, #current_date {
+h1 {
     
     font-family:'Lucida Sans', Verdana, sans-serif;
+    text-align: center;
     font-size: 20px;
     padding: 10px 30px;
-    background-color: #2c5e1a;
-    color: #b2d2a4;
-    border-radius: 5px;
-}
-
-h2 {
-    font-family:'Lucida Sans', Verdana, sans-serif;
-    font-size: 20px;
+    background-color: #0C6980;
+    color: white;
+    border-radius: 12px;
 }
