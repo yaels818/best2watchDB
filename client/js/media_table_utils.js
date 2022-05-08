@@ -3,9 +3,9 @@ $(document).ready(function () {
     $.ajax({
         url: "/GetList",
         success: function (result) {
-
-             fillTable(result);
-             console.log(result);
+            
+            fillTable(result);
+            console.log(result);
         },
         error: function (err) {
 
@@ -33,4 +33,7 @@ function fillTable(xml)
         table.appendChild(tr);
         //getViewsJSON(object,tr);
     });
+
+    //sortByDate(table);
 }
+

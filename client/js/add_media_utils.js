@@ -1,6 +1,7 @@
 $(document).ready(function () {
    
-    $("form[name='user_form']").validate({
+  // Set validation restrictions for the form
+    $("form[name='media_form']").validate({
         // Specify validation rules
         rules: {
           "name":{
