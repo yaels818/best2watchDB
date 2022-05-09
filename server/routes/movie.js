@@ -202,12 +202,16 @@ module.exports = {
         readFile(data => {
 
             // delete movie by movieId
-            const movieId = req.params["id"];
+            const movieId = req.params.movie_id; 
             if(data[movieId])
                 delete data[movieId];
             else
+            {
                 res.sendStatus(400);
+                return;
 
+            }
+                
             writeFile(JSON.stringify(data, null, 2), () => {
                 res.status(200).send(`movie id:${movieId} removed`);
             });
@@ -219,17 +223,41 @@ module.exports = {
     deleteActorFromMovie: function (req, res) {
 
         readFile(data => {
-            //TODO 
 
-            // delete movie by movieId
-            const movieId = req.params["id"];
-            if(data[movieId])
-                delete data[movieId];
+            const movieId = req.params.movie_id; 
+            if (!data[movieId])
+            {
+                res.status(400).send(`movie id:${movieId}  not found`);
+                return;
+            }
+                
+
+            const actorName = req.body.actorName;
+            const db = data[movieId];
+
+            let actor = db.actors[actorName];
+            if (!actor){
+                res.status(400).send(`actor: ${actorName}  not found`);
+                return;
+            }
             else
-                res.sendStatus(400);
+                delete data[movieId].actors[actorName];        
+            
+            const movie_details = {
+                "id?": movieId,
+                "name": db.name,
+                "picture" : db.picture,
+                "director": db.director,
+                "date": db.date,
+                "rating": db.rating,
+                "isSeries": db.isSeries,
+                "series_details": db.series_details,
+                "actors": data[movieId].actors
+                };
+            data[movieId] = movie_details;
 
             writeFile(JSON.stringify(data, null, 2), () => {
-                res.status(200).send(`movie id:${movieId} removed`);
+                res.status(200).send(`actor: ${actorName} in movie id: ${movieId} removed`);
             });
         },
             true);

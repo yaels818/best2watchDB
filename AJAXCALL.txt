@@ -1,0 +1,210 @@
+5.	getMovies ():
+$(document).ready(function () {
+      $("button").click(function () {
+        $.ajax({
+          url: "/list",
+          success: function (result) {
+            let str='';
+            $.each(result, function (index, value) {
+              str += "<div><span>name is: "+value.name+"</span>";
+            });
+            $("#div1").html(str);
+            console.log(result);
+          },
+          error: function (err) {
+            console.log("err", err);
+          }
+        });
+
+      });
+    });
+-----------------------------------------------------------
+4.	getMovie (movie_id)
+ $(document).ready(function () {
+      $("button").click(function () {
+        $.ajax({
+          url: "/list/Movie_ID",
+          success: function (result) {
+            let str='';
+            $.each(result, function (index, value) {
+              str += "<div><span>name is: "+value.name+"</span>";
+              str += ",<span> profession is: "+value.date+"</span></div>";
+            });
+            $("#div1").html(str);
+            console.log(result);
+          },
+          error: function (err) {
+            console.log("err", err);
+          }
+        });
+
+      });
+    });
+-----------------------------------
+1.	CreateMovie (movieDetails)
+$(document).ready(function () {
+      $("button").click(function () {
+        $.ajax({
+          type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+            url: '/movie', // the url where we want to POST
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "movieId": "linoy_id2",
+                "name": "movie_linoy",
+                "picture": "some_url",
+                "director": "director_name",
+                "date": "10-10-2022",
+                "rating": 2,
+                "isSeries": true,
+                "series_details" : [12,17],
+            }),
+            processData: false,            
+            dataType: 'json', // what type of data do we expect back from the server
+            encode: true,
+          success: function (result) {
+            let str='';
+            //$.each(result, function (index, value) {
+            //  str += "<div><span>name is: "+value.name+"</span>";
+            //  str += ",<span> profession is: "+value.date+"</span></div>";
+            //});
+            $("#div1").html(str);
+            console.log(result);
+          },
+          error: function (err) {
+            console.log("err", err);
+          }
+        });
+
+      });
+    });
+-------------------------------------------------
+2.	updateMovie (string movie_id, movieDetails)
+$(document).ready(function () {
+      $("button").click(function () {
+        $.ajax({
+          type: 'PUT', // define the type of HTTP verb we want to use (POST for our form)
+            url: '/movie/linoy_id2', // the url where we want to POST
+            contentType: 'application/json',
+            data: JSON.stringify({
+              "movie_id": "11111",
+              "movieDetails":{
+                "movieId": "linoy_id1",
+                "name": "movie_linoy1",
+                "picture": "some_url1",
+                "director": "director_name1",
+                "date": "10-10-2011",
+                "rating": 1,
+                "isSeries": true,
+                "series_details" : [11,11],
+                }
+            }
+              ),
+            processData: false,            
+            dataType: 'json', // what type of data do we expect back from the server
+            encode: true,
+          success: function (result) {
+            let str='';
+            //$.each(result, function (index, value) {
+            //  str += "<div><span>name is: "+value.name+"</span>";
+            //  str += ",<span> profession is: "+value.date+"</span></div>";
+            //});
+            $("#div1").html(str);
+            console.log(result);
+          },
+          error: function (err) {
+            console.log("err", err);
+          }
+        });
+
+      });
+    });
+------------------------------------------------------
+3.	AddActorToMovie (string movie_id,  ActorDetails )
+ $(document).ready(function () {
+      $("button").click(function () {
+        $.ajax({
+          type: 'PUT', // define the type of HTTP verb we want to use (POST for our form)
+            url: '/movie/linoy_id2', // the url where we want to POST
+            contentType: 'application/json',
+            data: JSON.stringify({
+              "movie_id": "11111",
+              "actorDetails":{
+                "name": "actor1",
+                "picture": "picture_url",
+                "site" : "site_url",
+                }
+            }
+              ),
+            processData: false,            
+            dataType: 'json', // what type of data do we expect back from the server
+            encode: true,
+          success: function (result) {
+            let str='';
+            //$.each(result, function (index, value) {
+            //  str += "<div><span>name is: "+value.name+"</span>";
+            //  str += ",<span> profession is: "+value.date+"</span></div>";
+            //});
+            $("#div1").html(str);
+            console.log(result);
+          },
+          error: function (err) {
+            console.log("err", err);
+          }
+        });
+
+      });
+    });
+------------------------------------------
+7.	deleteMovie( string movie_id)
+ $(document).ready(function () {
+      $("button").click(function () {
+        $.ajax({
+          type: 'DELETE', // define the type of HTTP verb we want to use (POST for our form)
+            url: '/movie/Snow_White', // the url where we want to POST
+            contentType: 'application/json',
+          success: function (result) {
+            let str='';
+            //$.each(result, function (index, value) {
+            //  str += "<div><span>name is: "+value.name+"</span>";
+            //  str += ",<span> profession is: "+value.date+"</span></div>";
+            //});
+            $("#div1").html(str);
+            console.log(result);
+          },
+          error: function (err) {
+            console.log("err", err);
+          }
+        });
+
+      });
+    });
+----------------------------------------------
+6.	deleteActorFromMovie (string movie_id,  string actor_name)
+ $(document).ready(function () {
+      $("button").click(function () {
+        $.ajax({
+          type: 'DELETE', // define the type of HTTP verb we want to use (POST for our form)
+            url: '/actor/Cinderella', // the url where we want to POST
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "actorName": "actor_1_name",
+            }),
+            processData: false,            
+            dataType: 'json', // what type of data do we expect back from the server
+            encode: true,
+          success: function (result) {
+            let str='';
+            //$.each(result, function (index, value) {
+            //  str += "<div><span>name is: "+value.name+"</span>";
+            //  str += ",<span> profession is: "+value.date+"</span></div>";
+            //});
+            $("#div1").html(str);
+            console.log(result);
+          },
+          error: function (err) {
+            console.log("err", err);
+          }
+        });
+
+      });
+    });
