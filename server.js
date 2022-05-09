@@ -9,7 +9,6 @@ const port = 3001;
 const app = express();
 
 app.use('/index', express.static(path.join(__dirname, 'client/html/media_list.html')));
-app.use('/add_media', express.static(path.join(__dirname, 'client/html/add_media_form.html')));
 app.use('/list', express.static(path.join(__dirname, 'client/html/media_list.html')));
 
 app.use('/js', express.static(path.join(__dirname, 'client/js')));

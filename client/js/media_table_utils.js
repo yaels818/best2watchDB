@@ -1,10 +1,8 @@
 $(document).ready(function () {
 
-    var elem = document.getElementById('addNewMedia');
-    $(elem).hide();
-    $("#addMedia_btn_1").click(OpenMedia);
-    $("#addMedia_btn_2").click(OpenMedia);
-    $("#submit_btn").click(CloseMedia);
+    $(".add_media_button").click(openAddMedia);
+    $("#add_btn").click(submitAddMedia);
+    $("#close_btn").click(closeAddMedia);
 
     $.ajax({
         url: "/GetList",
@@ -43,18 +41,22 @@ function fillTable(xml)
     //sortByDate(table);
 }
 
-function OpenMedia()
-{
-    var elem = document.getElementById('addNewMedia');
-    $(elem).show();
-    document.getElementById("addMedia_btn_1").disabled = true;
-    document.getElementById("addMedia_btn_2").disabled = true;
+function openAddMedia(){
+
+    document.getElementByClass("form-popup").style.display = "block";
+    document.getElementByClass("add_media_button").disabled = true;
 }
 
-function CloseMedia()
-{
-    //TODO: update according to ajax.txt (each function and its type, url, form fields)
+function closeAddMedia(){
+
+    document.getElementByClass("form-popup").style.display = "none";
+    document.getElementByClass("add_media_button").disabled = false;
+}
+
+function submitAddMedia(){
     
+    //TODO: update according to ajax.txt (each function and its type, url, form fields)
+    /*
     // process the form
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -78,10 +80,12 @@ function CloseMedia()
             console.log( errorThrown );
         }
     })
-
-    var elem = document.getElementById('addNewMedia');
-    $(elem).hide();
+    */
+    document.getElementByClass("form-popup").style.display = "none";
     document.getElementById("addMedia_btn_1").disabled = false;
     document.getElementById("addMedia_btn_2").disabled = false;
 }
+
+
+
 

@@ -1,28 +1,35 @@
 $(document).ready(function () {
   
-    $("#seasons-group").hide();
-    $("#episodes-group").hide();
+  // Hide fields while series checkbox is off
+  $("#seasons-group").hide();
+  $("#episodes-group").hide();
 
-   $("#is_series_field").change(function () {
-    $("#seasons-group").toggle();
-    $("#episodes-group").toggle();
-   });
+  // Show fields when series checkbox is on
+  $("#is_series_field").change(function () {
+  $("#seasons-group").toggle();
+  $("#episodes-group").toggle();
+  });
 
   // Set validation restrictions for the form
-    $("form[name='media_form']").validate({
-        // Specify validation rules
+    $("form[id='media_form']").validate({
+        
+      // Specify validation rules
         rules: {
-          "name":{
-            minlength: 5
-          },
-          "id_field": {
+          "id_field":{
             required: true,
-            digits: true,
-            minlength: 6
+            minlength: 1
           },
-          "email":{
-            "email":true
+          "name_field": {
+            required: true,
+            text: true,
+            minlength: 1
+          },
+          "pic_url_field":{
+            required: true,
+            text: true,
+            minlength: 1
           }
+          
         },
         // Specify validation error messages
         messages: {       
@@ -72,10 +79,3 @@ $(document).ready(function () {
 
 });
 
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
-}
-
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
-}

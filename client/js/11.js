@@ -1,23 +1,5 @@
 $(document).ready(function () {
    
-    $("form[name='user_form']").validate({
-        // Specify validation rules
-        rules: {
-          "name":{
-            minlength: 5
-          },
-          "id_field": {
-            required: true,
-            digits: true
-          }
-        },
-        // Specify validation error messages
-        messages: {       
-          name: "Your name must be at least 5 characters long",
-          id_field:"Please enter only digits"
-        }
-      });
-
     // process the form
     $('#user_form').submit(function (event) {
         if(!$("#user_form").valid()) return;

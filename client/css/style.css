@@ -1,4 +1,4 @@
-html {
+html, .media_container {
     margin: 0;
     padding: 5px;
     background-color: #C4DBE0;
@@ -12,37 +12,7 @@ body {
     font-size: 15px;
 }
 
-button {
-    background-color: #0C6980;
-    border: none;
-    color: white;
-    padding: 10px 30px;
-    text-align: center;
-    font-size: 20px;
-    margin: 4px 2px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
 button:hover {background-color: #00a8a8;}
-
-/*
-#addMedia_btn_1{
-    position: absolute;
-    transition: .5s ease;
-    top: 1%;
-    left: 40%;
-    
-}
-
-#addMedia_btn_2{
-    position: absolute;
-    transition: .5s ease;
-    bottom: 1%;
-    left: 40%;
-}
-*/
 
 #listMediaTB {
     width: auto;
@@ -75,15 +45,11 @@ img {
     height:100px
 }
 
-#media_form {
-    font-family:'Lucida Sans', Verdana, sans-serif;
-}
-
 h1 {
     font-family:'Lucida Sans', Verdana, sans-serif;
     text-align: center;
-    font-size: 20px;
-    padding: 10px 30px;
+    font-size: 10px;
+    padding: 10px 20px;
     background-color: #0C6980;
     color: white;
     border-radius: 12px;
@@ -92,53 +58,54 @@ h1 {
 *{box-sizing: border-box;}
 
 /* Button used to open the contact form - fixed at the bottom of the page */
-.open-button {
-  background-color: #555;
+.add_media_button {
+  background-color: #0C6980;;
   color: white;
-  padding: 16px 20px;
+  padding: 10px 30px;
+  text-align: center;
+  font-size: 20px;
+  margin: 4px 2px;
+  font-weight: bold;
   border: none;
   cursor: pointer;
-  opacity: 0.8;
+  border-radius: 12px;
+  /*opacity: 0.8;*/
   position: fixed;
-  bottom: 23px;
-  right: 28px;
-  width: 280px;
+}
+
+#addMedia_btn_1 {
+    top: 23px;
+    right: 28px;
+    width: 280px;
+}
+
+#addMedia_btn_2 {
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
 }
 
 /* The popup form - hidden by default */
 .form-popup {
-  display: none;
+  display: block;
   position: fixed;
-  bottom: 0;
+  top: 5px;
+  bottom: 5px;
   right: 15px;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
+  /*border: 3px solid #f1f1f1;*/
+  /*z-index: 9;*/
 }
 
 /* Add styles to the form container */
 .form-container {
-  max-width: 300px;
+  max-width: 500px;
   padding: 10px;
+  font-family:'Lucida Sans', Verdana, sans-serif;
   background-color: white;
 }
 
-/* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
 /* Set a style for the submit/login button */
-.form-container .btn {
+.form-container .btn_add {
   background-color: #04AA6D;
   color: white;
   padding: 16px 20px;
@@ -148,13 +115,4 @@ h1 {
   margin-bottom:10px;
   opacity: 0.8;
 }
-
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: red;
-}
-
-/* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
-} 
+ 
