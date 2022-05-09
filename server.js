@@ -8,8 +8,7 @@ routers = require('./server/routes/routes.js');
 const port = 3001;
 const app = express();
 
-app.use('/main', express.static(path.join(__dirname, 'client/html/index.html')));
-app.use('/list_users', express.static(path.join(__dirname, 'client/html/index.html')));
+app.use('/index', express.static(path.join(__dirname, 'client/html/media_list.html')));
 app.use('/add_media', express.static(path.join(__dirname, 'client/html/add_media_form.html')));
 app.use('/list', express.static(path.join(__dirname, 'client/html/media_list.html')));
 

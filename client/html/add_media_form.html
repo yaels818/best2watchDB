@@ -22,9 +22,9 @@
         <form id="media_form" name="media_form" method="POST">
 
             <!-- Media_ID -->
-            <div id="name-group" class="form-group">
+            <div id="media-group" class="form-group">
                 <label for="id">Media ID</label>
-                <input type="text" class="form-control" name="id_field" id="id_field" placeholder="Write Media ID here..."
+                <input type="text" class="form-control" name="id_field" id="id_field" placeholder="Write here..."
                     required>
                 <!-- errors will go here -->
             </div>
@@ -32,67 +32,70 @@
             <!-- Media Name -->
             <div id="name-group" class="form-group">
                 <label for="name">Media Name</label>
-                <input type="text" class="form-control" name="name_field" id="name_field" placeholder="Write Media Name here..."
+                <input type="text" class="form-control" name="name_field" id="name_field" placeholder="Write here..."
                     required>
                 <!-- errors will go here -->
             </div>
 
             <!-- Picture URL -->
-            <div id="name-group" class="form-group">
+            <div id="picture-group" class="form-group">
                 <label for="picture">Picture</label>
-                <input type="text" class="form-control" name="pic_url_field" id="pic_url_field" placeholder="Write Media Picture URL here..."
+                <input type="url" class="form-control" name="pic_url_field" id="pic_url_field" placeholder="Write URL here..."
                     required>
                 <!-- errors will go here -->
             </div>
 
             <!-- Director Name -->
-            <div id="name-group" class="form-group">
+            <div id="director-group" class="form-group">
                 <label for="director">Director Name</label>
-                <input type="text" class="form-control" name="director_field" id="director_field" placeholder="Write Director Name here..."
+                <input type="text" class="form-control" name="director_field" id="director_field" placeholder="Write here..."
                     required>
                 <!-- errors will go here -->
             </div>
 
             <!-- Release Date -->
-            <div id="name-group" class="form-group">
+            <div id="date-group" class="form-group">
                 <label for="release_date">Release Date</label>
-                <input type="date" class="form-control" name="date_field" id="date_field" placeholder="Write Release Date here..."
+                <input type="date" class="form-control" name="date_field" id="date_field" placeholder="Pick a date..."
                     required>
                 <!-- errors will go here -->
             </div>
 
             <!-- Rating -->
-            <div id="name-group" class="form-group">
-                <label for="rating">Rating</label>
-                <input type="number" class="form-control" name="rating_field" id="rating_field" placeholder="Write Rating here (1 = meh, 5 = awesome)"
-                    required>
+            <div id="rating-group" class="form-group">
+                <label for="rating">Rating (between 1=bad AND 5=awesome)</label>
+                <input type="range" class="form-control" name="rating_field" id="rating_field" 
+                required min="1" max="5" step="1" value = "3" oninput = "rating_field_disp.value=rating_field.value">
+                <output  id="rating_field_disp"></output>
                 <!-- errors will go here -->
             </div>
 
             <!-- is_Series -->
-            <div id="name-group" class="form-group">
+            <div id="series-group" class="form-group">
                 <label for="is_series">Is this a series?</label>
-                <input type="checkbox" class="form-control" name="is_series_field" id="is_series_field" required>
+                <input type="checkbox" class="form-control" name="is_series_field" id="is_series_field">
+                
                 <!-- errors will go here -->
             </div>
 
             <!-- Seasons -->
-            <div id="name-group" class="form-group">
+            <div id="seasons-group" class="form-group">
                 <label for="seasons">How many seasons?</label>
                 <input type="number" class="form-control" name="seasons_field" id="seasons_field"
-                    placeholder="Write number of seasons here...">
+                    placeholder="Write here...">
                 <!-- errors will go here -->
             </div>
 
             <!-- Episodes -->
-            <div id="name-group" class="form-group">
+            <div id="episodes-group" class="form-group">
                 <label for="episodes">How many episodes in each season?</label>
                 <input type="number" class="form-control" name="episodes_field" id="episodes_field"
-                    placeholder="Write number of episodes here...">
+                    placeholder="Write here...">
                 <!-- errors will go here -->
             </div>
 
-            <button id="submit_btn" type="submit" class="button">Submit <span class="fa fa-arrow-right"></span></button>
+            <button id="submit_btn" type="submit" class="btn_submit">Submit <span class="fa fa-arrow-right"></span></button>
+            <button id="close_btn" type="close" class="btn_cancel" onclick="closeForm()">Close</button>
 
         </form>
 

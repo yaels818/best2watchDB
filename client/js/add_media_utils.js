@@ -1,5 +1,13 @@
 $(document).ready(function () {
-   
+  
+    $("#seasons-group").hide();
+    $("#episodes-group").hide();
+
+   $("#is_series_field").change(function () {
+    $("#seasons-group").toggle();
+    $("#episodes-group").toggle();
+   });
+
   // Set validation restrictions for the form
     $("form[name='media_form']").validate({
         // Specify validation rules
@@ -63,3 +71,11 @@ $(document).ready(function () {
     });
 
 });
+
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
