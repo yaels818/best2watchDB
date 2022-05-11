@@ -1,9 +1,68 @@
 $(document).ready(function () {
 
-    $(".add_media_button").click(openAddMedia);
-    $("#add_btn").click(submitAddMedia);
+    $("#addMedia_btn_1").click(openAddMedia);
+    $("#addMedia_btn_2").click(openAddMedia);
+    
     $("#close_btn").click(closeAddMedia);
 
+    closeAddMedia();
+
+    GetList();
+    
+
+     // Show fields when series checkbox is on
+    $("#is_series_field").change(function () {
+    $("#seasons-group").toggle();
+    $("#episodes-group").toggle();
+    });
+  
+    // Set validation restrictions for the form
+      $("form[id='media_form']").validate({
+          
+        // Specify validation rules
+          rules: {
+            "id_field":{
+              required: true,
+              minlength: 1
+            },
+            "name_field": {
+              required: true,
+              text: true,
+              minlength: 1
+            },
+            "pic_url_field":{
+              required: true,
+              text: true,
+              minlength: 1
+            }
+            
+          },
+          // Specify validation error messages
+          messages: {       
+            name: "Your name must be at least 5 characters long",
+            id_field:{
+              digits:"Please enter only digits",
+              minlength: "Your name must be at least 6 characters long"
+            },
+            email: "email structure is some@domain "
+          }
+        });
+
+
+        $('#media_form').submit(function (event) {
+            submitAddMedia();
+            // stop the form from submitting the normal way and refreshing the page
+            event.preventDefault();
+            GetList();
+        });
+    //$("#add_btn").click(submitAddMedia);
+
+
+});
+
+
+function GetList()
+{
     $.ajax({
         url: "/GetList",
         success: function (result) {
@@ -16,14 +75,16 @@ $(document).ready(function () {
           console.log("err", err);
         }
     });
-    
-});
+
+}
 
 function fillTable(xml)
 {
     const jsonObj = xml;
     
     var table = document.getElementById("listMediaTB");
+
+    table.innerHTML = "<thead><tr> <th>Media-ID</th><th>Name</th><th>Picture</th><th>Rating</th><th>Release Date</th></tr> </thead>";
 
     jsonObj.forEach(function(object) {
 
@@ -43,47 +104,47 @@ function fillTable(xml)
 
 function openAddMedia(){
 
-    document.getElementByClass("form-popup").style.display = "block";
-    document.getElementByClass("add_media_button").disabled = true;
+    let element = document.getElementById("div_media_form")
+    element.style.display = "block";
 }
 
 function closeAddMedia(){
 
-    document.getElementByClass("form-popup").style.display = "none";
-    document.getElementByClass("add_media_button").disabled = false;
+    let element = document.getElementById("div_media_form")
+    element.style.display = "none";
 }
 
 function submitAddMedia(){
     
-    //TODO: update according to ajax.txt (each function and its type, url, form fields)
-    /*
+
+    //if(!$("#user_form").valid()) return;
+  
+    console.log("in submit");
+
+
     // process the form
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-        url: 'http://localhost:3001/users', // the url where we want to POST
+        url: '/movie', // the url where we want to POST
         contentType: 'application/json',
         data: JSON.stringify({
-            "name": $("#username").val(),
-            "password": $("#password").val(),
-            "profession": $("#profession").val(),
-            "id": $("#id_field").val()
+            "movieId": $("#id_field").val(),
+            "name": $("#name_field").val(),
+            "picture": $("#pic_url_field").val(),
+            "director": $("#director_field").val(),
+            "date": $("#date_field").val(),
+            "rating": $("#rating_field").val(),
+            "isSeries": $("#is_series_field").val(),
+            "series_details" : $("#episodes_field").val(),
         }),
         processData: false,            
-       // dataType: 'json', // what type of data do we expect back from the server
         encode: true,
         success: function( data, textStatus, jQxhr ){
             console.log(data);
-            location.href = "/main";
-
-        },
-        error: function( jqXhr, textStatus, errorThrown ){
-            console.log( errorThrown );
         }
     })
-    */
-    document.getElementByClass("form-popup").style.display = "none";
-    document.getElementById("addMedia_btn_1").disabled = false;
-    document.getElementById("addMedia_btn_2").disabled = false;
+
+    closeAddMedia();
 }
 
 

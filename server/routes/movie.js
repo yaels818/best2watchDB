@@ -86,7 +86,7 @@ module.exports = {
 
             // add the new movie if not exist 
             const movieId = req.body.movieId;
-            if (!movieId) return res.sendStatus(400);  
+            if (!movieId) return res.status(400).send('there is no id');
             if(!data[movieId])
             {
                 const movie_details = {
@@ -104,7 +104,7 @@ module.exports = {
             } 
             else
             {
-                return res.sendStatus(400);  
+                return res.status(400).send('format not match');
             }
 
             writeFile(JSON.stringify(data, null, 2), () => {
