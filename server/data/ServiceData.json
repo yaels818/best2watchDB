@@ -1,39 +1,13 @@
 {
-  "111": {
-    "id?": "111",
-    "name": "vvv",
-    "picture": "https://yedion.jce.ac.il/yedion/fireflyweb.aspx",
-    "director": "abba",
-    "date": "2022-05-02",
-    "rating": "3",
-    "isSeries": "on",
-    "series_details": "",
-    "actors": {}
-  },
-  "1112": {
-    "id?": "1112",
-    "name": "linoylinoy1",
-    "picture": "https://yedion.jce.ac.il/yedion/fireflyweb.aspx",
-    "director": "abba",
-    "date": "2022-05-03",
-    "rating": "3",
-    "isSeries": "on",
-    "series_details": "",
-    "actors": {}
-  },
   "Cinderella": {
-    "id?": "001",
-    "name": "Cinderella",
+    "id?": "Cinderella",
+    "name": "Cinderella2",
     "picture": "https://blog.meshagency.com/wp-content/uploads/2015/07/Party-Minions1.jpg",
-    "director": "director name",
-    "date": "01-10-2021",
-    "rating": 5,
-    "isSeries": true,
-    "series_details": [
-      10,
-      12,
-      13
-    ],
+    "director": "director name2",
+    "date": "2022-05-07",
+    "rating": "3",
+    "isSeries": "true",
+    "series_details": "[]",
     "actors": {
       "actor_1_name": {
         "name?": "actor_1_name",
@@ -48,7 +22,7 @@
     }
   },
   "Snow_White": {
-    "id?": "002",
+    "id?": "Snow_White",
     "name": "Snow White",
     "picture": "url2",
     "director": "director name2",
@@ -74,7 +48,7 @@
     }
   },
   "The_Little_Mermaid": {
-    "id?": "003",
+    "id?": "The_Little_Mermaid",
     "name": "The Little Mermaid",
     "picture": "some_url",
     "director": "director_name",
@@ -88,7 +62,7 @@
     "actors": {}
   },
   "Mulan": {
-    "id?": "004",
+    "id?": "Mulan",
     "name": "Mulan",
     "picture": "some_url",
     "director": "director_name",
@@ -102,7 +76,7 @@
     "actors": {}
   },
   "Pocahontas": {
-    "id?": "005",
+    "id?": "Pocahontas",
     "name": "Pocahontas",
     "picture": "some_url",
     "director": "director_name",
@@ -113,17 +87,6 @@
       12,
       17
     ],
-    "actors": {}
-  },
-  "linoy123": {
-    "id?": "linoy123",
-    "name": "linoylinoy1",
-    "picture": "https://yedion.jce.ac.il/yedion/fireflyweb.aspx",
-    "director": "abba",
-    "date": "2022-05-10",
-    "rating": "3",
-    "isSeries": "on",
-    "series_details": "",
     "actors": {}
   }
 }
