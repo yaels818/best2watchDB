@@ -1,15 +1,14 @@
+let mediaData;
+
 $(document).ready(function () {
 
     $("#addMedia_btn_1").click(openAddMedia);
     $("#addMedia_btn_2").click(openAddMedia);
-    
     $("#close_btn").click(closeAddMedia);
 
     closeAddMedia();
-
-    GetList();
+    fillTable();
     
-
      // Show fields when series checkbox is on
     $("#is_series_field").change(function () {
     $("#seasons-group").toggle();
@@ -53,7 +52,6 @@ $(document).ready(function () {
             submitAddMedia();
             // stop the form from submitting the normal way and refreshing the page
             event.preventDefault();
-            GetList();
         });
     //$("#add_btn").click(submitAddMedia);
 
@@ -65,26 +63,26 @@ function GetList()
 {
     $.ajax({
         url: "/GetList",
+        async: false,
         success: function (result) {
-            
-            fillTable(result);
+            mediaData = result;
             console.log(result);
         },
         error: function (err) {
-
           console.log("err", err);
         }
     });
 
 }
 
-function fillTable(xml)
+function fillTable()
 {
-    const jsonObj = xml;
+    GetList();
+    const jsonObj = mediaData;
     
     var table = document.getElementById("listMediaTB");
 
-    table.innerHTML = "<thead><tr> <th>Media-ID</th><th>Name</th><th>Picture</th><th>Rating</th><th>Release Date</th></tr> </thead>";
+    table.innerHTML = "<thead><tr> <th>Media-ID</th><th>Name</th><th>Picture</th><th>Rating</th><th>Release Date</th><th>Action</th></tr></thead>";
 
     jsonObj.forEach(function(object) {
 
@@ -93,7 +91,11 @@ function fillTable(xml)
                         '<td>' + object["name"] + '</td>' +
                         '<td>' + '<img src = "' + object["picture"] + '"/img>' + '</td>' +
                         '<td>' + object["rating"] + '</td>' +
-                        '<td>' + object["date"] + '</td>';
+                        '<td>' + object["date"] + '</td>'+
+                        '<td>'+ "<button id = \"" + object["id?"] + "_updateMedia" + "\" onclick = updateMedia("+object["id?"]+") > update </button>" +
+                        "<br>" + "<button id = \"" + object["id?"] + "_addActor" + "\" onclick = addActor("+object["id?"]+") > add actor </button>" +
+                        "<br>" + "<button id = \"" + object["id?"] + "_viewActors" + "\" onclick = viewActors("+object["id?"]+") > view actors </button>" +
+                        "<br>" + "<button id = \"" + object["id?"] + "\" onclick = removeMedia("+object["id?"]+") > remove media </button>" + "</td>";
 
         table.appendChild(tr);
         //getViewsJSON(object,tr);
@@ -115,12 +117,7 @@ function closeAddMedia(){
 }
 
 function submitAddMedia(){
-    
-
     //if(!$("#user_form").valid()) return;
-  
-    console.log("in submit");
-
 
     // process the form
     $.ajax({
@@ -140,13 +137,37 @@ function submitAddMedia(){
         processData: false,            
         encode: true,
         success: function( data, textStatus, jQxhr ){
-            console.log(data);
+            //console.log(data);
+            alert("media added!");
+            fillTable();
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+            alert("media not added!");
         }
     })
 
     closeAddMedia();
 }
 
+function updateMedia(media_id)
+{
 
+}
+
+function addActor(media_id)
+{
+    
+}
+
+function viewActors(media_id)
+{
+    
+}
+
+function removeMedia(media_id)
+{
+    
+}
 
 
