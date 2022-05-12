@@ -63,13 +63,6 @@ $(document).ready(function () {
             // stop the form from submitting the normal way and refreshing the page
             event.preventDefault();
         });
-
-
-        
-
-    //$("#add_btn").click(submitAddMedia);
-
-
 });
 
 
@@ -223,8 +216,6 @@ function submitUpdateMedia(){
     closeUpdateMedia();
 }
 
-
-
 function addActor(media_id)
 {
     
@@ -237,6 +228,24 @@ function viewActors(media_id)
 
 function removeMedia(media_id)
 {
+    let media = mediaData.find(x => x[Object.keys(x)[0]] === media_id);
+
+    if (confirm('Are you sure you want to delete '+ media.name +'?')) {
+        $.ajax({
+            type: 'DELETE', // define the type of HTTP verb we want to use (POST for our form)
+              url: '/movie/'+media_id, // the url where we want to POST
+              contentType: 'application/json',
+            success: function (result) {
+                alert("media deleted");
+                fillTable();
+            },
+            error: function (err) {
+              console.log("err", err);
+            }
+          });
+      } 
+      else {}
+
     
 }
 

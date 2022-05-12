@@ -74,19 +74,5 @@
       17
     ],
     "actors": {}
-  },
-  "Pocahontas": {
-    "id?": "Pocahontas",
-    "name": "Pocahontas",
-    "picture": "some_url",
-    "director": "director_name",
-    "date": "10-10-2022",
-    "rating": 2,
-    "isSeries": true,
-    "series_details": [
-      12,
-      17
-    ],
-    "actors": {}
   }
 }
