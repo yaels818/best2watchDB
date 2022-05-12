@@ -8,10 +8,12 @@ $(document).ready(function () {
     $("#close_btn").click(closeAddMedia);
     $("#update_close_btn").click(closeUpdateMedia);
     $("#actor_close_btn").click(closeAddActor);
+    $("#view_actor_close_btn").click(closeViewActor);
 
     closeAddMedia();
     closeUpdateMedia();
     closeAddActor();
+    closeViewActor();
 
     fillTable();
     
@@ -73,7 +75,6 @@ $(document).ready(function () {
     });
 });
 
-
 function GetList()
 {
     $.ajax({
@@ -109,7 +110,7 @@ function fillTable()
                         '<td>' + object["date"] + '</td>'+
                         '<td>'+ "<button id = \"" + object["id?"] + "_updateMedia" + "\" onclick = openUpdateMedia(\""+object["id?"]+"\") > update </button>" +
                         "<br>" + "<button id = \"" + object["id?"] + "_addActor" + "\" onclick = openAddActor(\""+object["id?"]+"\") > add actor </button>" +
-                        "<br>" + "<button id = \"" + object["id?"] + "_viewActors" + "\" onclick = viewActors(\""+object["id?"]+"\") > view actors </button>" +
+                        "<br>" + "<button id = \"" + object["id?"] + "_viewActors" + "\" onclick = openViewActors(\""+object["id?"]+"\") > view actors </button>" +
                         "<br>" + "<button id = \"" + object["id?"] + "\" onclick = removeMedia(\""+object["id?"]+"\") > remove media </button>" + "</td>";
 
         table.appendChild(tr);
@@ -262,9 +263,41 @@ function submitAddActor()
       });
 }
 
-function viewActors(media_id)
+function openViewActors(media_id)
 {
-    
+    curr_update_media_id= media_id;
+
+    let element = document.getElementById("div_view_actor_form")
+    element.style.display = "block";
+
+    var table = document.getElementById("actorsTB");
+
+    table.innerHTML = "<thead><tr> <th>Name</th> <th>Picture</th> <th>Page</th> <th>Action</th> </tr></thead>";
+
+    $.ajax({
+        url: "/list/"+media_id,
+        success: function (result) {
+            let actors = result.actors;
+
+            $.each(actors, function(index, value) {
+                var tr = document.createElement('tr');
+                tr.innerHTML =  '<td>' + value["name?"] + '</td>' +
+                                '<td>' + '<img src = "' + value["picture"] + '"/img>' + '</td>' +
+                                '<td>' + '<img src = "' + value["site"] + '"/img>' + '</td>' +
+                                '<td>'+ "<button id = \"" + media_id + "_" + value["name?"] + "_removeActor" + "\" onclick = removeActor(\""+value["name?"]+"\") > delete </button></td>";
+        
+                table.appendChild(tr);
+            }); 
+        },
+        error: function (err) {
+          console.log("err", err);
+        }
+      });
+}
+
+function closeViewActor(){
+    let element = document.getElementById("div_view_actor_form")
+    element.style.display = "none";
 }
 
 function removeMedia(media_id)
@@ -290,4 +323,28 @@ function removeMedia(media_id)
     
 }
 
+
+function removeActor(actor_name)
+{
+    if (confirm('Are you sure you want to delete '+ actor_name +'?')) {
+        $.ajax({
+            type: 'DELETE', // define the type of HTTP verb we want to use (POST for our form)
+            url: '/actor/'+curr_update_media_id, // the url where we want to POST
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "actorName": actor_name,
+            }),
+            success: function (result) {
+                alert("actor deleted");
+                openViewActors(curr_update_media_id);
+            },
+            error: function (err) {
+              console.log("err", err);
+            }
+          });
+      } 
+      else {}
+
+    
+}
 
