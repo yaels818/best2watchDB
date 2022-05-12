@@ -7,10 +7,12 @@ $(document).ready(function () {
     $("#addMedia_btn_2").click(openAddMedia);
     $("#close_btn").click(closeAddMedia);
     $("#update_close_btn").click(closeUpdateMedia);
-
+    $("#actor_close_btn").click(closeAddActor);
 
     closeAddMedia();
     closeUpdateMedia();
+    closeAddActor();
+
     fillTable();
     
      // Show fields when series checkbox is on
@@ -52,17 +54,23 @@ $(document).ready(function () {
         });
 
 
-        $('#media_form').submit(function (event) {
-            submitAddMedia();
-            // stop the form from submitting the normal way and refreshing the page
-            event.preventDefault();
-        });
+    $('#media_form').submit(function (event) {
+        submitAddMedia();
+        // stop the form from submitting the normal way and refreshing the page
+        event.preventDefault();
+    });
 
-        $('#update_media_form').submit(function (event) {
-            submitUpdateMedia();
-            // stop the form from submitting the normal way and refreshing the page
-            event.preventDefault();
-        });
+    $('#update_media_form').submit(function (event) {
+        submitUpdateMedia();
+        // stop the form from submitting the normal way and refreshing the page
+        event.preventDefault();
+    });
+
+    $('#actor_form').submit(function (event) {
+        submitAddActor();
+        // stop the form from submitting the normal way and refreshing the page
+        event.preventDefault();
+    });
 });
 
 
@@ -100,15 +108,12 @@ function fillTable()
                         '<td>' + object["rating"] + '</td>' +
                         '<td>' + object["date"] + '</td>'+
                         '<td>'+ "<button id = \"" + object["id?"] + "_updateMedia" + "\" onclick = openUpdateMedia(\""+object["id?"]+"\") > update </button>" +
-                        "<br>" + "<button id = \"" + object["id?"] + "_addActor" + "\" onclick = addActor(\""+object["id?"]+"\") > add actor </button>" +
+                        "<br>" + "<button id = \"" + object["id?"] + "_addActor" + "\" onclick = openAddActor(\""+object["id?"]+"\") > add actor </button>" +
                         "<br>" + "<button id = \"" + object["id?"] + "_viewActors" + "\" onclick = viewActors(\""+object["id?"]+"\") > view actors </button>" +
                         "<br>" + "<button id = \"" + object["id?"] + "\" onclick = removeMedia(\""+object["id?"]+"\") > remove media </button>" + "</td>";
 
         table.appendChild(tr);
-        //getViewsJSON(object,tr);
     });
-
-    //sortByDate(table);
 }
 
 function openAddMedia(){
@@ -146,6 +151,7 @@ function submitAddMedia(){
         success: function( data, textStatus, jQxhr ){
             //console.log(data);
             alert("media added!");
+            closeAddMedia();
             fillTable();
         },
         error: function (jqXhr, textStatus, errorThrown) {
@@ -154,7 +160,7 @@ function submitAddMedia(){
         }
     })
 
-    closeAddMedia();
+    
 }
 
 function openUpdateMedia(media_id){
@@ -205,6 +211,7 @@ function submitUpdateMedia(){
         success: function( data, textStatus, jQxhr ){
             //console.log(data);
             alert("media update!");
+            closeUpdateMedia();
             fillTable();
         },
         error: function (jqXhr, textStatus, errorThrown) {
@@ -213,12 +220,46 @@ function submitUpdateMedia(){
         }
     })
 
-    closeUpdateMedia();
+    
 }
 
-function addActor(media_id)
+function openAddActor(media_id){
+    curr_update_media_id = media_id;
+    let element = document.getElementById("div_actor_form")
+    element.style.display = "block";
+}
+
+function closeAddActor(){
+    let element = document.getElementById("div_actor_form")
+    element.style.display = "none";
+}
+
+function submitAddActor()
 {
-    
+    $.ajax({
+        type: 'PUT', 
+          url: '/actor/'+curr_update_media_id, 
+          contentType: 'application/json',
+          data: JSON.stringify({
+            "movie_id": curr_update_media_id,
+            "actorDetails":{
+              "name": $("#actor_name_field").val(),
+              "picture": $("#actor_pic_url_field").val(),
+              "site" : $("#actor_page_url_field").val(),
+              }
+          }),
+          processData: false,            
+          encode: true,
+        success: function( data, textStatus, jQxhr ){
+            //console.log(data);
+            alert("actor update!");
+            closeAddActor();
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+            alert("actor not update!");
+        }
+      });
 }
 
 function viewActors(media_id)
