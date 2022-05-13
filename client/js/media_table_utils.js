@@ -178,6 +178,20 @@ function openUpdateMedia(media_id){
     let element = document.getElementById("div_update_media_form")
     element.style.display = "block";
 
+    $("#update_seasons-group").hide();
+    $("#update_episodes-group").hide();
+
+    // Show these fields only when series checkbox is on
+    $("#update_is_series_field").click(function () {
+        if ($(this).is(":checked")) {
+        $("#update_seasons-group").show();
+        $("#update_episodes-group").show();
+        } else {
+        $("#update_seasons-group").hide();
+        $("#update_episodes-group").hide();
+    }
+    });
+
     let media = mediaData.find(x => x[Object.keys(x)[0]] === media_id);
 
     $("#update_name_field").val(media.name);
@@ -228,8 +242,6 @@ function submitUpdateMedia(){
             alert("media not update!");
         }
     })
-
-    
 }
 
 function openAddActor(media_id){
