@@ -36,6 +36,7 @@ $(document).ready(function () {
     });
 });
 
+// Call JSON file
 function GetList()
 {
     $.ajax({
@@ -55,9 +56,13 @@ function GetList()
 // Fill media table
 function fillTable()
 {
+    // Get the media data
     GetList();
 
     const jsonObj = mediaData;
+    
+    //jsonObj = sortDateDec(mediaData);
+
     
     var table = document.getElementById("listMediaTB");
 
@@ -347,7 +352,7 @@ function openViewActors(media_id)
     $("button.btn_close").click(function(){
         $("button.action_btn").attr("disabled", false);
     });
-    
+
     var table = document.getElementById("actorsTB");
 
     table.innerHTML = "<thead><tr> <th>Name</th> <th>Picture</th> <th>Page</th> <th>Action</th> </tr></thead>";
@@ -423,3 +428,24 @@ function removeActor(actor_name)
       else {}
 }
 
+// Sort all media by date, descending
+function sortDateDec(mediaData)
+{
+    for (let i = 0; i < mediaData.length-1; i++) {
+        
+    } 
+}
+
+function sortDateVal(a, b) {
+    var dateA = Date.parse(a.value),
+        dateB = Date.parse(b.value);
+
+    return sortNumber(dateA, dateB);
+}
+
+/**
+ * Numeric sort comparison
+ */
+ function sortNumber(a, b) {
+    return a - b;
+}
