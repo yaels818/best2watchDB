@@ -9,6 +9,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script src="/js/media_table_utils.js"></script> 
+    <script src="/js/sort_media_table.js"></script> 
     
     
 </head>
@@ -17,7 +18,7 @@
     <div class = "media_container">
         <button id = "addMedia_btn_1" class = "add_media_button">Add Media</button>
         <br>
-        <table id = "listMediaTB", class = "display">
+        <table id = "listMediaTB", class = "sortable">
             <thead>
                 <tr>
                     <th>Media-ID</th>
@@ -90,7 +91,7 @@
                 <!-- is_Series -->
                 <div id="series-group" class="form-group">
                     <label for="is_series">Is this a series?</label>
-                    <input type="checkbox" class="form-control" id="is_series_field">
+                    <input type="checkbox" class="form-control" id="is_series_field" checked="unchecked">
                     
                     <!-- errors will go here -->
                 </div>

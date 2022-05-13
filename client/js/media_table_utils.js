@@ -16,12 +16,6 @@ $(document).ready(function () {
     closeViewActor();
 
     fillTable();
-    
-     // Show fields when series checkbox is on
-    $("#is_series_field").change(function () {
-    $("#seasons-group").toggle();
-    $("#episodes-group").toggle();
-    });
   
     // Set validation restrictions for the form
       $("form[id='media_form']").validate({
@@ -121,6 +115,20 @@ function openAddMedia(){
 
     let element = document.getElementById("div_media_form")
     element.style.display = "block";
+
+    $("#seasons-group").hide();
+    $("#episodes-group").hide();
+
+    // Show these fields only when series checkbox is on
+    $("#is_series_field").click(function () {
+        if ($(this).is(":checked")) {
+        $("#seasons-group").show();
+        $("#episodes-group").show();
+        } else {
+        $("#seasons-group").hide();
+        $("#episodes-group").hide();
+    }
+});
 }
 
 function closeAddMedia(){

@@ -74,15 +74,29 @@
   "Mulan": {
     "id?": "Mulan",
     "name": "Mulan",
-    "picture": "some_url",
-    "director": "director_name",
-    "date": "10-10-2022",
-    "rating": 2,
-    "isSeries": true,
-    "series_details": [
-      12,
-      17
-    ],
+    "picture": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.jxvLRPBlK902Jfu4saHfXAHaJM%26pid%3DApi&f=1",
+    "director": "Disney",
+    "date": "2022-05-31",
+    "rating": "1",
+    "isSeries": "true",
+    "series_details": "[12]",
+    "actors": {
+      "Mulan": {
+        "name?": "Mulan",
+        "picture": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F1.bp.blogspot.com%2F-06TQG-d04Ro%2FXpQr9CA5wrI%2FAAAAAAAAAic%2FMTu5-CzEEz0dpyDH4Zx6QOn_MFagQqC8wCLcBGAsYHQ%2Fs1600%2F6070f06fc3386a2e89db7132dae5fa3f.jpg&f=1&nofb=1",
+        "site": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F1.bp.blogspot.com%2F-06TQG-d04Ro%2FXpQr9CA5wrI%2FAAAAAAAAAic%2FMTu5-CzEEz0dpyDH4Zx6QOn_MFagQqC8wCLcBGAsYHQ%2Fs1600%2F6070f06fc3386a2e89db7132dae5fa3f.jpg&f=1&nofb=1"
+      }
+    }
+  },
+  "Poch123": {
+    "id?": "Poch123",
+    "name": "Pocahontas",
+    "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
+    "director": "Disney",
+    "date": "2022-05-25",
+    "rating": "4",
+    "isSeries": "on",
+    "series_details": "",
     "actors": {}
   }
 }
