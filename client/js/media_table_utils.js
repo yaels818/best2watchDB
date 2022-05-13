@@ -71,10 +71,10 @@ function fillTable()
                         '<td>' + '<img src = "' + object["picture"] + '"/img>' + '</td>' +
                         '<td>' + object["rating"] + '</td>' +
                         '<td>' + object["date"] + '</td>'+
-                        '<td>'+ "<button id = \"" + object["id?"] + "_updateMedia" + "\" onclick = openUpdateMedia(\""+object["id?"]+"\") > Update </button>" +
-                        "<br>" + "<button id = \"" + object["id?"] + "_addActor" + "\" onclick = openAddActor(\""+object["id?"]+"\") > Add Actor </button>" +
-                        "<br>" + "<button id = \"" + object["id?"] + "_viewActors" + "\" onclick = openViewActors(\""+object["id?"]+"\") > View Actors </button>" +
-                        "<br>" + "<button id = \"" + object["id?"] + "\" onclick = removeMedia(\""+object["id?"]+"\") > Remove Media </button>" + "</td>";
+                        '<td>'+ "<button class = \"action_btn\" id = \"" + object["id?"] + "_updateMedia" + "\" onclick = openUpdateMedia(\""+object["id?"]+"\") > Update </button>" +
+                        "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "_addActor" + "\" onclick = openAddActor(\""+object["id?"]+"\") > Add Actor </button>" +
+                        "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "_viewActors" + "\" onclick = openViewActors(\""+object["id?"]+"\") > View Actors </button>" +
+                        "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "\" onclick = removeMedia(\""+object["id?"]+"\") > Remove Media </button>" + "</td>";
 
         table.appendChild(tr);
     });
@@ -83,8 +83,19 @@ function fillTable()
 // Open add media pop-up window
 function openAddMedia(){
 
+    // Display side window
     let element = document.getElementById("div_media_form")
     element.style.display = "block";
+
+    // Disable action buttons while media pop-up window is open
+    $("button.action_btn").attr("disabled", true);
+
+    $("button.btn_add").click(function(){
+        $("button.action_btn").attr("disabled", false);
+    });
+    $("button.btn_close").click(function(){
+        $("button.action_btn").attr("disabled", false);
+    });
 
     $("#seasons-group").hide();
     $("#episodes-group").hide();
@@ -108,14 +119,24 @@ function closeAddMedia(){
     element.style.display = "none";
 }
 
+// Submit add media form, close pop-up window and refresh table
 function submitAddMedia(){
     
     // Convert needed fields to match json format
     var is_series = false;
+    let series_details = [];
+
     if ($('#is_series_field').is(":checked"))
     {
         is_series = true;
+        series_details = $("#episodes_field").val().split(",");
+
+        for (let i = 0; i < series_details.length; i++) {
+            series_details[i] = Number(series_details[i]);
+        } 
     }
+
+    console.log(series_details);
 
     // process the form
     $.ajax({
@@ -130,7 +151,7 @@ function submitAddMedia(){
             "date": $("#date_field").val().split("-").reverse().join("-"),
             "rating": Number($("#rating_field").val()),
             "isSeries": is_series,
-            "series_details" : $("#episodes_field").val(),
+            "series_details" : series_details,
         }),
         processData: false,            
         encode: true,
@@ -147,11 +168,22 @@ function submitAddMedia(){
     })
 }
 
+// Open update media pop-up window filled with data from json file
 function openUpdateMedia(media_id){
 
     curr_update_media_id = media_id;
     let element = document.getElementById("div_update_media_form")
     element.style.display = "block";
+
+    // Disable action buttons while media pop-up window is open
+    $("button.action_btn").attr("disabled", true);
+
+    $("button.btn_add").click(function(){
+        $("button.action_btn").attr("disabled", false);
+    });
+    $("button.btn_close").click(function(){
+        $("button.action_btn").attr("disabled", false);
+    });
 
     $("#update_seasons-group").hide();
     $("#update_episodes-group").hide();
@@ -169,28 +201,53 @@ function openUpdateMedia(media_id){
 
     let media = mediaData.find(x => x[Object.keys(x)[0]] === media_id);
 
+    // Convert needed fields from json format
+    
+    var date = media.date.split("-").reverse().join("-");
+    var seasons = 0;
+
+    if (media.isSeries == true){
+        $("#update_is_series_field").attr('checked', true);
+        seasons = media.series_details.length;
+    }
+    else{
+        $("#update_is_series_field").attr('checked', false);
+    }
+
+    console.log(date);
+    console.log(seasons);
+
     $("#update_name_field").val(media.name);
     $("#update_pic_url_field").val(media.picture);
     $("#update_director_field").val(media.director);
-    $("#update_date_field").val(media.date);
+    $("#update_date_field").val(date);
     $("#update_rating_field").val(media.rating);
-    $("#update_is_series_field").val(media.isSeries);
+    $("#update_seasons_field").val(seasons)
     $("#update_episodes_field").val(media.series_details);
 }
 
+// Close update media pop-up window
 function closeUpdateMedia(){
 
     let element = document.getElementById("div_update_media_form")
     element.style.display = "none";
 }
 
+// Submit update media form, close pop-up window and refresh table
 function submitUpdateMedia(){
 
     // Convert needed fields to match json format
     var is_series = false;
+    let series_details = [];
+
     if ($('#update_is_series_field').is(":checked"))
     {
         is_series = true;
+        series_details = $("#episodes_field").val().split(",");
+
+        for (let i = 0; i < series_details.length; i++) {
+            series_details[i] = Number(series_details[i]);
+        } 
     }
     
     // process the form
@@ -208,7 +265,7 @@ function submitUpdateMedia(){
             "date": $("#update_date_field").val().split("-").reverse().join("-"),
             "rating": Number($("#update_rating_field").val()),
             "isSeries": is_series,
-            "series_details" : "["+$("#update_episodes_field").val()+"]",
+            "series_details" : series_details,
             }}),
         processData: false,            
         encode: true,
@@ -229,6 +286,16 @@ function openAddActor(media_id){
     curr_update_media_id = media_id;
     let element = document.getElementById("div_actor_form")
     element.style.display = "block";
+
+    // Disable action buttons while media pop-up window is open
+    $("button.action_btn").attr("disabled", true);
+
+    $("button.btn_add").click(function(){
+        $("button.action_btn").attr("disabled", false);
+    });
+    $("button.btn_close").click(function(){
+        $("button.action_btn").attr("disabled", false);
+    });
 }
 
 function closeAddActor(){
@@ -271,6 +338,16 @@ function openViewActors(media_id)
     let element = document.getElementById("div_view_actor_form")
     element.style.display = "block";
 
+    // Disable action buttons while media pop-up window is open
+    $("button.action_btn").attr("disabled", true);
+
+    $("button.btn_add").click(function(){
+        $("button.action_btn").attr("disabled", false);
+    });
+    $("button.btn_close").click(function(){
+        $("button.action_btn").attr("disabled", false);
+    });
+    
     var table = document.getElementById("actorsTB");
 
     table.innerHTML = "<thead><tr> <th>Name</th> <th>Picture</th> <th>Page</th> <th>Action</th> </tr></thead>";
@@ -344,10 +421,5 @@ function removeActor(actor_name)
           });
       } 
       else {}
-}
-
-function formatBeforeInsert()
-{
-    
 }
 

@@ -4,10 +4,10 @@
     "name": "Cinderella2",
     "picture": "https://blog.meshagency.com/wp-content/uploads/2015/07/Party-Minions1.jpg",
     "director": "director name2",
-    "date": "2022-05-07",
-    "rating": "3",
-    "isSeries": "true",
-    "series_details": "[]",
+    "date": "07-08-2022",
+    "rating": 1,
+    "isSeries": false,
+    "series_details": [],
     "actors": {
       "actor_1_name": {
         "name?": "actor_1_name",
@@ -45,11 +45,6 @@
         "picture": "url",
         "site": "url"
       },
-      "actor_3_name2": {
-        "name?": "actor_3_name2",
-        "picture": "url",
-        "site": "url"
-      },
       "c1": {
         "name?": "c1",
         "picture": "https://glz.co.il/%D7%92%D7%9C%D7%92%D7%9C%D7%A6/%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%95%D7%AA/%D7%9E%D7%93%D7%99%D7%A0%D7%94-%D7%91%D7%93%D7%A8%D7%9A-%D7%A2%D7%9D-%D7%94%D7%93%D7%A8-%D7%9E%D7%A8%D7%A7%D7%A1/%D7%9E%D7%93%D7%99%D7%A0%D7%94-%D7%91%D7%93%D7%A8%D7%9A-%D7%A2%D7%9D-%D7%94%D7%93%D7%A8-%D7%9E%D7%A8%D7%A7%D7%A1-%D7%95%D7%91%D7%A0%D7%99-%D7%9B%D7%91%D7%95%D7%93%D7%99-1052022",
@@ -57,26 +52,15 @@
       }
     }
   },
-  "Poch123": {
-    "id?": "Poch123",
-    "name": "Pocahontas",
+  "Test4": {
+    "id?": "Test4",
+    "name": "Harry Potter",
     "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "Disney",
-    "date": "2022-05-25",
-    "rating": "4",
-    "isSeries": "on",
-    "series_details": "",
-    "actors": {}
-  },
-  "alice2": {
-    "id?": "alice2",
-    "name": "Alice In Wonderland",
-    "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "Francis",
-    "date": "13-05-2022",
+    "director": "David Yates",
+    "date": "07-05-2022",
     "rating": 3,
     "isSeries": true,
-    "series_details": "",
+    "series_details": [],
     "actors": {}
   }
 }
