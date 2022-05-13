@@ -23,12 +23,7 @@ const writeFile = (fileData, callback, filePath = dataPath, encoding = 'utf8') =
 
             callback();
         });
-    };
-
-    function comp(a, b) {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
-      }
-      
+    }; 
       
 module.exports = {
     //READ

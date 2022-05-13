@@ -32,17 +32,18 @@ button:hover {background-color: #00a8a8;}
 }
 
 th {
-    background-color: #0C6980;
+    background-color: #b5cece;
     padding: 10px;
     font-size: 20px;
-    color: white;
+    color: #0C6980;
+    opacity: 0.8;
 }
 
 tr:hover {background-color: #88ca5e;}
 
 img {
     width:100px;
-    height:100px
+    height:120px
 }
 
 h1 {

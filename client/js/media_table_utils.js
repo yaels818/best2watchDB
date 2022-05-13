@@ -3,6 +3,7 @@ let curr_update_media_id;
 
 $(document).ready(function () {
 
+    // Establish button functions
     $("#addMedia_btn_1").click(openAddMedia);
     $("#addMedia_btn_2").click(openAddMedia);
     $("#close_btn").click(closeAddMedia);
@@ -10,48 +11,14 @@ $(document).ready(function () {
     $("#actor_close_btn").click(closeAddActor);
     $("#view_actor_close_btn").click(closeViewActor);
 
-    closeAddMedia();
-    closeUpdateMedia();
-    closeAddActor();
-    closeViewActor();
-
+    // Fill media table
     fillTable();
   
-    // Set validation restrictions for the form
-      $("form[id='media_form']").validate({
-          
-        // Specify validation rules
-          rules: {
-            "id_field":{
-              required: true,
-              minlength: 1
-            },
-            "name_field": {
-              required: true,
-              text: true,
-              minlength: 1
-            },
-            "pic_url_field":{
-              required: true,
-              text: true,
-              minlength: 1
-            }
-            
-          },
-          // Specify validation error messages
-          messages: {       
-            name: "Your name must be at least 5 characters long",
-            id_field:{
-              digits:"Please enter only digits",
-              minlength: "Your name must be at least 6 characters long"
-            },
-            email: "email structure is some@domain "
-          }
-        });
-
-
+    // 
     $('#media_form').submit(function (event) {
+
         submitAddMedia();
+
         // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
     });
@@ -85,14 +52,16 @@ function GetList()
 
 }
 
+// Fill media table
 function fillTable()
 {
     GetList();
+
     const jsonObj = mediaData;
     
     var table = document.getElementById("listMediaTB");
 
-    table.innerHTML = "<thead><tr> <th>Media-ID</th><th>Name</th><th>Picture</th><th>Rating</th><th>Release Date</th><th>Action</th></tr></thead>";
+    table.innerHTML = "<thead><tr><th>Media-ID</th><th>Name</th><th>Picture</th><th>Rating</th><th>Release Date</th><th>Action</th></tr></thead>";
 
     jsonObj.forEach(function(object) {
 
@@ -102,15 +71,16 @@ function fillTable()
                         '<td>' + '<img src = "' + object["picture"] + '"/img>' + '</td>' +
                         '<td>' + object["rating"] + '</td>' +
                         '<td>' + object["date"] + '</td>'+
-                        '<td>'+ "<button id = \"" + object["id?"] + "_updateMedia" + "\" onclick = openUpdateMedia(\""+object["id?"]+"\") > update </button>" +
-                        "<br>" + "<button id = \"" + object["id?"] + "_addActor" + "\" onclick = openAddActor(\""+object["id?"]+"\") > add actor </button>" +
-                        "<br>" + "<button id = \"" + object["id?"] + "_viewActors" + "\" onclick = openViewActors(\""+object["id?"]+"\") > view actors </button>" +
-                        "<br>" + "<button id = \"" + object["id?"] + "\" onclick = removeMedia(\""+object["id?"]+"\") > remove media </button>" + "</td>";
+                        '<td>'+ "<button id = \"" + object["id?"] + "_updateMedia" + "\" onclick = openUpdateMedia(\""+object["id?"]+"\") > Update </button>" +
+                        "<br>" + "<button id = \"" + object["id?"] + "_addActor" + "\" onclick = openAddActor(\""+object["id?"]+"\") > Add Actor </button>" +
+                        "<br>" + "<button id = \"" + object["id?"] + "_viewActors" + "\" onclick = openViewActors(\""+object["id?"]+"\") > View Actors </button>" +
+                        "<br>" + "<button id = \"" + object["id?"] + "\" onclick = removeMedia(\""+object["id?"]+"\") > Remove Media </button>" + "</td>";
 
         table.appendChild(tr);
     });
 }
 
+// Open add media pop-up window
 function openAddMedia(){
 
     let element = document.getElementById("div_media_form")
@@ -131,6 +101,7 @@ function openAddMedia(){
 });
 }
 
+// Close add media pop-up window
 function closeAddMedia(){
 
     let element = document.getElementById("div_media_form")
@@ -138,7 +109,13 @@ function closeAddMedia(){
 }
 
 function submitAddMedia(){
-    //if(!$("#user_form").valid()) return;
+    
+    // Convert needed fields to match json format
+    var is_series = false;
+    if ($('#is_series_field').is(":checked"))
+    {
+        is_series = true;
+    }
 
     // process the form
     $.ajax({
@@ -150,15 +127,15 @@ function submitAddMedia(){
             "name": $("#name_field").val(),
             "picture": $("#pic_url_field").val(),
             "director": $("#director_field").val(),
-            "date": $("#date_field").val(),
-            "rating": $("#rating_field").val(),
-            "isSeries": $("#is_series_field").val(),
+            "date": $("#date_field").val().split("-").reverse().join("-"),
+            "rating": Number($("#rating_field").val()),
+            "isSeries": is_series,
             "series_details" : $("#episodes_field").val(),
         }),
         processData: false,            
         encode: true,
         success: function( data, textStatus, jQxhr ){
-            //console.log(data);
+            console.log(data);
             alert("media added!");
             closeAddMedia();
             fillTable();
@@ -168,8 +145,6 @@ function submitAddMedia(){
             alert("media not added!");
         }
     })
-
-    
 }
 
 function openUpdateMedia(media_id){
@@ -210,8 +185,14 @@ function closeUpdateMedia(){
 }
 
 function submitUpdateMedia(){
-    //if(!$("#user_form").valid()) return;
 
+    // Convert needed fields to match json format
+    var is_series = false;
+    if ($('#update_is_series_field').is(":checked"))
+    {
+        is_series = true;
+    }
+    
     // process the form
     $.ajax({
         type: 'PUT', 
@@ -224,22 +205,22 @@ function submitUpdateMedia(){
             "name": $("#update_name_field").val(),
             "picture": $("#update_pic_url_field").val(),
             "director": $("#update_director_field").val(),
-            "date": $("#update_date_field").val(),
-            "rating": $("#update_rating_field").val(),
-            "isSeries": $("#update_is_series_field").val(),
+            "date": $("#update_date_field").val().split("-").reverse().join("-"),
+            "rating": Number($("#update_rating_field").val()),
+            "isSeries": is_series,
             "series_details" : "["+$("#update_episodes_field").val()+"]",
             }}),
         processData: false,            
         encode: true,
         success: function( data, textStatus, jQxhr ){
             //console.log(data);
-            alert("media update!");
+            alert("media updated!");
             closeUpdateMedia();
             fillTable();
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
-            alert("media not update!");
+            alert("media not updated!");
         }
     })
 }
@@ -273,12 +254,12 @@ function submitAddActor()
           encode: true,
         success: function( data, textStatus, jQxhr ){
             //console.log(data);
-            alert("actor update!");
+            alert("actor updated!");
             closeAddActor();
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
-            alert("actor not update!");
+            alert("actor not updated!");
         }
       });
 }
@@ -343,7 +324,6 @@ function removeMedia(media_id)
     
 }
 
-
 function removeActor(actor_name)
 {
     if (confirm('Are you sure you want to delete '+ actor_name +'?')) {
@@ -364,7 +344,10 @@ function removeActor(actor_name)
           });
       } 
       else {}
+}
 
+function formatBeforeInsert()
+{
     
 }
 
