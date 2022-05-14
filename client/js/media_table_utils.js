@@ -66,22 +66,31 @@ function fillTable()
     
     var table = document.getElementById("listMediaTB");
 
-    table.innerHTML = "<thead><tr><th>Media-ID</th><th>Name</th><th>Picture</th><th>Rating</th><th>Release Date</th><th>Action</th></tr></thead>";
+    table.innerHTML =   "<thead><tr>" +
+                        "<th>Media-ID</th>" + 
+                        "<th data-type=\"string\">Name</th>" + 
+                        "<th>Picture</th>" + 
+                        "<th data-type=\"number\">Rating</th>" +
+                        "<th data-type=\"date\">Release Date</th>" +
+                        "<th>Action</th>" +
+                        "</tr></thead>";
 
     jsonObj.forEach(function(object) {
 
+        var tbody = document.createElement('tbody');
         var tr = document.createElement('tr');
         tr.innerHTML =  '<td>' + object["id?"] + '</td>' +
                         '<td>' + object["name"] + '</td>' +
                         '<td>' + '<img src = "' + object["picture"] + '"/img>' + '</td>' +
                         '<td>' + object["rating"] + '</td>' +
                         '<td>' + object["date"] + '</td>'+
-                        '<td>'+ "<button class = \"action_btn\" id = \"" + object["id?"] + "_updateMedia" + "\" onclick = openUpdateMedia(\""+object["id?"]+"\") > Update </button>" +
+                        '<td>' + "<button class = \"action_btn\" id = \"" + object["id?"] + "_updateMedia" + "\" onclick = openUpdateMedia(\""+object["id?"]+"\") > Update </button>" +
                         "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "_addActor" + "\" onclick = openAddActor(\""+object["id?"]+"\") > Add Actor </button>" +
                         "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "_viewActors" + "\" onclick = openViewActors(\""+object["id?"]+"\") > View Actors </button>" +
                         "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "\" onclick = removeMedia(\""+object["id?"]+"\") > Remove Media </button>" + "</td>";
 
-        table.appendChild(tr);
+        tbody.appendChild(tr);
+        table.appendChild(tbody);
     });
 }
 
@@ -142,6 +151,44 @@ function submitAddMedia(){
     }
 
     console.log(series_details);
+
+    // Set validation restrictions for the add media form
+    $("form[id='media_form']").validate({
+        
+        // Specify validation rules
+        rules: {
+        "id_field":{
+            required: true
+        },
+        "name_field": {
+            required: true,
+            text: true
+        },
+        "pic_url_field":{
+            required: true
+        },
+        "director_field":{
+            required: true,
+            text: true
+        },
+        "date_field":{
+            required : true
+        },
+        "seasons_field":{
+            
+        },
+        "episodes_field":{
+            
+        }
+        },
+        // Specify validation error messages
+        messages: {       
+        id_field:{
+            minlength: "Your name must be at least 6 characters long"
+        },
+        email: "email structure is some@domain "
+        }
+    });
 
     // process the form
     $.ajax({
@@ -360,6 +407,7 @@ function openViewActors(media_id)
     $.ajax({
         url: "/list/"+media_id,
         success: function (result) {
+
             let actors = result.actors;
 
             $.each(actors, function(index, value) {

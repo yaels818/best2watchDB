@@ -4,14 +4,13 @@
 <head>
     <title>List of All Media</title>
     
-    <link rel = "stylesheet" href = "./css/style.css">
+    <link rel = "stylesheet" href = "/css/style.css">
     <link rel = "stylesheet" href = "//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script src="/js/media_table_utils.js"></script> 
     <script src="/js/sort_media_table.js"></script> 
-    
-    
+    <script src="/js/validate_forms.js"></script> 
 </head>
 
 <body>
@@ -24,7 +23,9 @@
 
     <div id="div_media_form"  class="form-popup">
             <!-- OUR FORM -->
-            <form id="media_form"  class="form-container" method="POST">
+            <form id="media_form"  class="form-container" method="POST" 
+            onsubmit="setTimeout(function () { window.location.reload(); }, 10)"
+            >
 
                 <h1>Add New Media</h1>
                 
@@ -81,7 +82,6 @@
                 <div id="series-group" class="form-group">
                     <label for="is_series">Is this a series?</label>
                     <input type="checkbox" class="form-control" id="is_series_field" checked="false">
-                    
                     <!-- errors will go here -->
                 </div>
 
@@ -109,7 +109,8 @@
 
     <div id="div_update_media_form"  class="form-popup">
         <!-- OUR FORM -->
-        <form id="update_media_form"  class="form-container" method="PUT">
+        <form id="update_media_form"  class="form-container" method="PUT"
+        onsubmit="setTimeout(function () { window.location.reload(); }, 10)">
 
             <h1>update media</h1>
             
@@ -141,7 +142,7 @@
             <div id="update_rating-group" class="form-group">
                 <label for="rating">Rating (between 1=bad AND 5=awesome)</label>
                 <input type="range" class="form-control" id="update_rating_field" 
-                required min="1" max="5" step="1" value = "3" oninput = "rating_field_disp.value=rating_field.value">
+                required min="1" max="5" step="1" value = "3" oninput = "rating_field_disp.value=update_rating_field.value">
                 <output  id="rating_field_disp"></output>
             </div>
 
@@ -173,7 +174,8 @@
 
     <div id="div_actor_form"  class="form-popup">
         <!-- OUR FORM -->
-        <form id="actor_form"  class="form-container" method="PUT">
+        <form id="actor_form"  class="form-container" method="PUT"
+        onsubmit="setTimeout(function () { window.location.reload(); }, 10)">
 
             <h1>Add New Actor</h1>
             
