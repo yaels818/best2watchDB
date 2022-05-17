@@ -24,13 +24,14 @@
             /* cellIndex is the number of th:
             *  0 for the first column, 1 for the second, etc.
             */
+            
             thead.addEventListener("click", sortGrid(thead.cellIndex, thead.dataset.type));
         }
     }
 
     function sortGrid(colNum, type) {
         console.log(colNum + "," + type);
-        
+
         let tbody = table.querySelector('tbody');
     
         let rowsArray = Array.from(tbody.rows);

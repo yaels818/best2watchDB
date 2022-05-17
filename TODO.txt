@@ -1,5 +1,4 @@
 SERVER:
-getMovies: קבלת סרטים לפני מיון תאריך בסדר יורד. 
 CreateMovie:  ולידציה האם זה סרט לא להכניס את פרטי הסדרה 
 CreateMovie: ולידציה שכל השדות קיימים
 addactor: ולידציה שכל השדות קיימים  
@@ -7,7 +6,6 @@ addactor: ולידציה שכל השדות קיימים
 
 CLIENT:
 מיונים לטבלה הראשית 
-לבדוק שכל הנתונים נשלחים, נשמרים, נטענים בפורמט הנכון 
 
 DONE:
 CreateMovie: ולידציה על התאריך - בפורמט dd-mm-yyyy
@@ -15,3 +13,5 @@ openUpdateMedia -> set the defulte value for: date,is series, seasonsx2
 submitAddMedia-> send seasons in the right format 
 date format dd-mm-yyyy in all ajax call 
 disable buttons when side form is open
+לבדוק שכל הנתונים נשלחים, נשמרים, נטענים בפורמט הנכון 
+getMovies: קבלת סרטים לפני מיון תאריך בסדר יורד. 

@@ -4,6 +4,25 @@
     "name": "2",
     "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
     "director": "12",
+    "date": "14-04-2021",
+    "rating": 3,
+    "isSeries": true,
+    "series_details": [
+      0
+    ],
+    "actors": {
+      "Tom Cruise": {
+        "name?": "Tom Cruise",
+        "picture": "https://blog.meshagency.com/wp-content/uploads/2015/07/Party-Minions1.jpg",
+        "site": "https://www.youtube.com"
+      }
+    }
+  },
+  "21": {
+    "id?": "21",
+    "name": "2",
+    "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
+    "director": "12",
     "date": "05-05-2022",
     "rating": 3,
     "isSeries": true,
@@ -69,6 +88,17 @@
     "series_details": [
       12
     ],
+    "actors": {}
+  },
+  "Test6": {
+    "id?": "Test6",
+    "name": "fdafda",
+    "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
+    "director": "fdafd",
+    "date": "06-05-2022",
+    "rating": 3,
+    "isSeries": false,
+    "series_details": [],
     "actors": {}
   }
 }

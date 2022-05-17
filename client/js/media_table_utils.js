@@ -59,10 +59,8 @@ function fillTable()
     // Get the media data
     GetList();
 
-    const jsonObj = mediaData;
-    
-    //jsonObj = sortDateDec(mediaData);
-
+    // Sort by release date - descending
+    const jsonObj = sortDateDec(mediaData);
     
     var table = document.getElementById("listMediaTB");
 
@@ -151,7 +149,7 @@ function submitAddMedia(){
     }
 
     console.log(series_details);
-
+    /*
     // Set validation restrictions for the add media form
     $("form[id='media_form']").validate({
         
@@ -189,7 +187,7 @@ function submitAddMedia(){
         email: "email structure is some@domain "
         }
     });
-
+    */
     // process the form
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -477,23 +475,13 @@ function removeActor(actor_name)
 }
 
 // Sort all media by date, descending
-function sortDateDec(mediaData)
-{
-    for (let i = 0; i < mediaData.length-1; i++) {
+function sortDateDec(mediaData){
+    
+    return mediaData.sort(function (a,b) {
+
+        const date1 = new Date(a["date"].split("-").reverse().join("-"))
+        const date2 = new Date(b["date"].split("-").reverse().join("-"))
         
-    } 
-}
-
-function sortDateVal(a, b) {
-    var dateA = Date.parse(a.value),
-        dateB = Date.parse(b.value);
-
-    return sortNumber(dateA, dateB);
-}
-
-/**
- * Numeric sort comparison
- */
- function sortNumber(a, b) {
-    return a - b;
+        return date2 - date1;
+    });
 }
