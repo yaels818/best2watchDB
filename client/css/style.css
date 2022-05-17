@@ -23,11 +23,10 @@ button:hover {background-color: #00a8a8;}
 }
 
 th {
-    background-color: #b5cece;
+    background-color: #0C6980;
     padding: 10px;
     font-size: 20px;
-    color: #0C6980;
-    opacity: 0.8;
+    color: white;
 }
 
 tr:hover {background-color: #88ca5e;}
@@ -113,4 +112,5 @@ h1 {
   position: fixed;
   top: 7%;
   right: 30%;
+  font-size: 15px;
 }

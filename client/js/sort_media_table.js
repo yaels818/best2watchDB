@@ -1,60 +1,65 @@
 
  $(document).ready(function () {
     
-    var tables = $("table.sortable");
-    var table, thead, headers, i, j, title;
+    $("#sorts_list").on('change', function() {
 
-    /**
-     * Inject hyperlinks, into the column headers of sortable tables, which sort
-     * the corresponding column when clicked.
-     */
-    for (i = 0; i < tables.length; i++) {
-        table = tables[i];
-       
-        if (thead = table.querySelector("thead")) {
-            headers = thead.querySelectorAll("th");
-            
-            for (j = 0; j < headers.length; j++) {
-                title = headers[j].innerText;
-                if (title == "Name" || title == "Rating" || title == "Release Date"){
-                    headers[j].innerHTML = "<a href='#'>" + headers[j].innerText + "</a>";
-                }
-            }
+        // Fill media table with this kind of sort
+        fillTable(this.value);
+      });
+ });
 
-            /* cellIndex is the number of th:
-            *  0 for the first column, 1 for the second, etc.
-            */
-            
-            thead.addEventListener("click", sortGrid(thead.cellIndex, thead.dataset.type));
-        }
-    }
+// Sorting Functions
+//--------------------------------------------
 
-    function sortGrid(colNum, type) {
-        console.log(colNum + "," + type);
+// Sort all media by name, ascending
+function sortNameAsc(mediaData){
+    
+    return mediaData.sort((a, b) => a.name.localeCompare(b.name));
+}
 
-        let tbody = table.querySelector('tbody');
+// Sort all media by name, descending
+function sortNameDec(mediaData){
     
-        let rowsArray = Array.from(tbody.rows);
+    return mediaData.reverse(mediaData.sort((a, b) => a.name.localeCompare(b.name)));
+}
+
+// Sort all media by rating, ascending
+function sortRatingAsc(mediaData) {
+
+    return mediaData.sort(function (a,b) {
+        return a["rating"] - b["rating"];
+    });
+}
+
+// Sort all media by rating, descending
+function sortRatingDec(mediaData) {
+
+    return mediaData.sort(function (a,b) {
+        return b["rating"] - a["rating"];
+    });
+}
+
+// Sort all media by date, ascending
+function sortDateAsc(mediaData){
     
-        // compare(a, b) compares two rows, need for sorting
-        let compare;
+    return mediaData.sort(function (a,b) {
+
+        const date1 = new Date(a["date"].split("-").reverse().join("-"))
+        const date2 = new Date(b["date"].split("-").reverse().join("-"))
+        
+        return date1 - date2;
+    });
+}
+
+ // Sort all media by date, descending
+function sortDateDec(mediaData){
     
-        switch (type) {
-            case 'number':
-            compare = function(rowA, rowB) {
-                return rowA.cells[colNum].innerHTML - rowB.cells[colNum].innerHTML;
-            };
-            break;
-            case 'string':
-            compare = function(rowA, rowB) {
-                return rowA.cells[colNum].innerHTML > rowB.cells[colNum].innerHTML ? 1 : -1;
-            };
-            break;
-        }
-    
-        // sort
-        rowsArray.sort(compare);
-    
-        tbody.append(...rowsArray);
-    }
-});
+    return mediaData.sort(function (a,b) {
+
+        const date1 = new Date(a["date"].split("-").reverse().join("-"))
+        const date2 = new Date(b["date"].split("-").reverse().join("-"))
+        
+        return date2 - date1;
+    });
+}
+

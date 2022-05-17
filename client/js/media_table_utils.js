@@ -12,7 +12,7 @@ $(document).ready(function () {
     $("#view_actor_close_btn").click(closeViewActor);
 
     // Fill media table
-    fillTable();
+    fillTable("default");
   
     // 
     $('#media_form').submit(function (event) {
@@ -54,13 +54,37 @@ function GetList()
 }
 
 // Fill media table
-function fillTable()
+function fillTable(sort_kind)
 {
-    // Get the media data
+    // Get JSON data into mediaData
     GetList();
 
-    // Sort by release date - descending
-    const jsonObj = sortDateDec(mediaData);
+    let jsonObj;
+
+    // Sort depending on what sort_kind was given 
+    switch (sort_kind) {
+        case "name_asc":
+            jsonObj = sortNameAsc(mediaData);
+            break;
+        case "name_dec":
+            jsonObj = sortNameDec(mediaData);
+            break;
+        case "rating_asc":
+            jsonObj = sortRatingAsc(mediaData);
+            break;
+        case "rating_dec":
+            jsonObj = sortRatingDec(mediaData);
+            break;
+        case "date_asc":
+            jsonObj = sortDateAsc(mediaData);
+            break;
+        case "date_dec":
+            jsonObj = sortDateDec(mediaData);
+            break;
+        default:
+            // Sort by release date - descending
+            jsonObj = sortDateDec(mediaData);
+    }
     
     var table = document.getElementById("listMediaTB");
 
@@ -209,7 +233,7 @@ function submitAddMedia(){
             console.log(data);
             alert("media added!");
             closeAddMedia();
-            fillTable();
+            fillTable("default");
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -323,7 +347,7 @@ function submitUpdateMedia(){
             //console.log(data);
             alert("media updated!");
             closeUpdateMedia();
-            fillTable();
+            fillTable("default");
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -440,7 +464,7 @@ function removeMedia(media_id)
               contentType: 'application/json',
             success: function (result) {
                 alert("media deleted");
-                fillTable();
+                fillTable("default");
             },
             error: function (err) {
               console.log("err", err);
@@ -472,16 +496,4 @@ function removeActor(actor_name)
           });
       } 
       else {}
-}
-
-// Sort all media by date, descending
-function sortDateDec(mediaData){
-    
-    return mediaData.sort(function (a,b) {
-
-        const date1 = new Date(a["date"].split("-").reverse().join("-"))
-        const date2 = new Date(b["date"].split("-").reverse().join("-"))
-        
-        return date2 - date1;
-    });
 }
