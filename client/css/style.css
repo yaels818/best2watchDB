@@ -108,3 +108,9 @@ h1 {
   margin-bottom:10px;
   opacity: 0.8;
 }
+
+.div_sort_table {
+  position: fixed;
+  top: 7%;
+  right: 30%;
+}
