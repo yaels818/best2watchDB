@@ -18,19 +18,6 @@
       }
     }
   },
-  "21": {
-    "id?": "21",
-    "name": "2",
-    "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "12",
-    "date": "05-05-2022",
-    "rating": 3,
-    "isSeries": true,
-    "series_details": [
-      12
-    ],
-    "actors": {}
-  },
   "Cinderella": {
     "id?": "Cinderella",
     "name": "Cinderella2",
@@ -62,7 +49,7 @@
     "rating": 4,
     "isSeries": true,
     "series_details": [
-      12
+      0
     ],
     "actors": {
       "actor_2_name2": {

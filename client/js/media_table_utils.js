@@ -125,13 +125,7 @@ function openAddMedia(){
 
     // Disable action buttons while media pop-up window is open
     $("button.action_btn").attr("disabled", true);
-
-    $("button.btn_add").click(function(){
-        $("button.action_btn").attr("disabled", false);
-    });
-    $("button.btn_close").click(function(){
-        $("button.action_btn").attr("disabled", false);
-    });
+    $("select").attr("disabled", true);
 
     $("#seasons-group").hide();
     $("#episodes-group").hide();
@@ -153,6 +147,9 @@ function closeAddMedia(){
 
     let element = document.getElementById("div_media_form")
     element.style.display = "none";
+
+    $("button.action_btn").attr("disabled", false);
+    $("select").attr("disabled", false);
 }
 
 // Submit add media form, close pop-up window and refresh table
@@ -167,14 +164,16 @@ function submitAddMedia(){
         is_series = true;
         series_details = $("#episodes_field").val().split(",");
 
+        // Fill series_details - length is number of seasons, each cell is number of episodes in season
         for (let i = 0; i < series_details.length; i++) {
             series_details[i] = Number(series_details[i]);
         } 
     }
 
     console.log(series_details);
+    
     /*
-    // Set validation restrictions for the add media form
+    // Set validation restrictions for the form
     $("form[id='media_form']").validate({
         
         // Specify validation rules
@@ -212,6 +211,7 @@ function submitAddMedia(){
         }
     });
     */
+    
     // process the form
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -251,13 +251,7 @@ function openUpdateMedia(media_id){
 
     // Disable action buttons while media pop-up window is open
     $("button.action_btn").attr("disabled", true);
-
-    $("button.btn_add").click(function(){
-        $("button.action_btn").attr("disabled", false);
-    });
-    $("button.btn_close").click(function(){
-        $("button.action_btn").attr("disabled", false);
-    });
+    $("select").attr("disabled", true);
 
     $("#update_seasons-group").hide();
     $("#update_episodes-group").hide();
@@ -305,6 +299,9 @@ function closeUpdateMedia(){
 
     let element = document.getElementById("div_update_media_form")
     element.style.display = "none";
+
+    $("button.action_btn").attr("disabled", false);
+    $("select").attr("disabled", false);
 }
 
 // Submit update media form, close pop-up window and refresh table
@@ -363,18 +360,15 @@ function openAddActor(media_id){
 
     // Disable action buttons while media pop-up window is open
     $("button.action_btn").attr("disabled", true);
-
-    $("button.btn_add").click(function(){
-        $("button.action_btn").attr("disabled", false);
-    });
-    $("button.btn_close").click(function(){
-        $("button.action_btn").attr("disabled", false);
-    });
+    $("select").attr("disabled", true);
 }
 
 function closeAddActor(){
     let element = document.getElementById("div_actor_form")
     element.style.display = "none";
+
+    $("button.action_btn").attr("disabled", false);
+    $("select").attr("disabled", false);
 }
 
 function submitAddActor()
@@ -414,13 +408,7 @@ function openViewActors(media_id)
 
     // Disable action buttons while media pop-up window is open
     $("button.action_btn").attr("disabled", true);
-
-    $("button.btn_add").click(function(){
-        $("button.action_btn").attr("disabled", false);
-    });
-    $("button.btn_close").click(function(){
-        $("button.action_btn").attr("disabled", false);
-    });
+    $("select").attr("disabled", true);
 
     var table = document.getElementById("actorsTB");
 
@@ -451,6 +439,9 @@ function openViewActors(media_id)
 function closeViewActor(){
     let element = document.getElementById("div_view_actor_form")
     element.style.display = "none";
+
+    $("button.action_btn").attr("disabled", false);
+    $("select").attr("disabled", false);
 }
 
 function removeMedia(media_id)
@@ -472,7 +463,6 @@ function removeMedia(media_id)
           });
       } 
       else {}
-
     
 }
 

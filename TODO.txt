@@ -5,7 +5,7 @@ addactor: ולידציה שכל השדות קיימים
 
 
 CLIENT:
-מיונים לטבלה הראשית 
+client-side tests?
 
 DONE:
 CreateMovie: ולידציה על התאריך - בפורמט dd-mm-yyyy
@@ -15,3 +15,4 @@ date format dd-mm-yyyy in all ajax call
 disable buttons when side form is open
 לבדוק שכל הנתונים נשלחים, נשמרים, נטענים בפורמט הנכון 
 getMovies: קבלת סרטים לפני מיון תאריך בסדר יורד. 
+מיונים לטבלה הראשית

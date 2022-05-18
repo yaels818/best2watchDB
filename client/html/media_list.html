@@ -42,48 +42,44 @@
                 <!-- Media_ID -->
                 <div id="media-group" class="form-group">
                     <label for="id">Media ID</label>
-                    <input type="text" class="form-control" id="id_field" placeholder="Write here..."
-                        required>
+                    <input type="text" class="form-control" id="id_field" placeholder="Write here..." required>
                     <!-- errors will go here -->
                 </div>
 
                 <!-- Media Name -->
                 <div id="name-group" class="form-group">
                     <label for="name">Media Name</label>
-                    <input type="text" class="form-control" id="name_field" placeholder="Write here..."
-                        required>
+                    <input type="text" class="form-control" id="name_field" placeholder="Write here..." required>
                     <!-- errors will go here -->
                 </div>
 
                 <!-- Picture URL -->
                 <div id="picture-group" class="form-group">
                     <label for="picture">Picture</label>
-                    <input type="url" class="form-control" id="pic_url_field" placeholder="Write URL here..."
-                        required>
+                    <input type="url" class="form-control" id="pic_url_field" placeholder="Copy the URL here..." required>
                     <!-- errors will go here -->
                 </div>
 
                 <!-- Director Name -->
                 <div id="director-group" class="form-group">
                     <label for="director">Director Name</label>
-                    <input type="text" class="form-control" id="director_field" placeholder="Write here..."
-                        required>
+                    <input type="text" class="form-control" id="director_field" placeholder="Write here..." required>
                     <!-- errors will go here -->
                 </div>
 
                 <!-- Release Date -->
                 <div id="date-group" class="form-group">
                     <label for="release_date">Release Date</label>
-                    <input type="date" class="form-control" id="date_field" placeholder="Pick a date..."
-                        required>
+                    <input type="date" class="form-control" id="date_field" placeholder="Pick a date..." required>
                     <!-- errors will go here -->
                 </div>
 
                 <!-- Rating -->
                 <div id="rating-group" class="form-group">
                     <label for="rating">Rating (between 1=bad AND 5=awesome)</label>
-                    <input type="range" class="form-control" id="rating_field" 
-                    required min="1" max="5" step="1" value = "3" oninput = "rating_field_disp.value=rating_field.value">
+                    <input type="range" class="form-control" id="rating_field" required 
+                    min="1" max="5" step="1" value = "3" 
+                    oninput = "rating_field_disp.value=rating_field.value">
                     <output  id="rating_field_disp"></output>
                     <!-- errors will go here -->
                 </div>
@@ -98,16 +94,14 @@
                 <!-- Seasons -->
                 <div id="seasons-group" class="form-group">
                     <label for="seasons">How many seasons?</label>
-                    <input type="number" class="form-control" id="seasons_field"
-                        placeholder="Write here...">
+                    <input type="number" class="form-control" id="seasons_field" placeholder="Write here...">
                     <!-- errors will go here -->
                 </div>
 
                 <!-- Episodes -->
                 <div id="episodes-group" class="form-group">
                     <label for="episodes">How many episodes in each season?</label>
-                    <input type="text" class="form-control" id="episodes_field"
-                        placeholder="First, Second, Third...">
+                    <input type="text" class="form-control" id="episodes_field" placeholder="10,21,12,...(e.g.)">
                     <!-- errors will go here -->
                 </div>
 
