@@ -43,14 +43,14 @@
                 <div id="media-group" class="form-group">
                     <label for="id">Media ID</label>
                     <input type="text" class="form-control" id="id_field" placeholder="Write here..." required>
-                    <!-- errors will go here -->
+                    <br><p id = id_field_error></p>
                 </div>
 
                 <!-- Media Name -->
                 <div id="name-group" class="form-group">
                     <label for="name">Media Name</label>
                     <input type="text" class="form-control" id="name_field" placeholder="Write here..." required>
-                    <!-- errors will go here -->
+                    <br><p id = name_field_error></p>
                 </div>
 
                 <!-- Picture URL -->
@@ -87,7 +87,7 @@
                 <!-- is_Series -->
                 <div id="series-group" class="form-group">
                     <label for="is_series">Is this a series?</label>
-                    <input type="checkbox" class="form-control" id="is_series_field" checked="false">
+                    <input type="checkbox" class="form-control" id="is_series_field">
                     <!-- errors will go here -->
                 </div>
 
@@ -167,7 +167,7 @@
             <div id="update_episodes-group" class="form-group">
                 <label for="episodes">How many episodes in each season?</label>
                 <input type="text" class="form-control" id="update_episodes_field"
-                    placeholder="First, Second, Third...">
+                    placeholder="10,21,12,...(e.g.)">
             </div>
 
             <button id="update_add_btn" type="submit" class="btn_add">Update </button>

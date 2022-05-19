@@ -5,6 +5,8 @@ addactor: ולידציה שכל השדות קיימים
 
 
 CLIENT:
+Update movies - close button still updates some of the details (everything except media_id)
+update movies - doesn't update series
 client-side tests?
 
 DONE:

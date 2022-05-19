@@ -1,14 +1,15 @@
 {
   "2": {
     "id?": "2",
-    "name": "2",
+    "name": "Pocahontas",
     "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "12",
-    "date": "14-04-2021",
-    "rating": 3,
+    "director": "director name2",
+    "date": "19-10-2022",
+    "rating": 4,
     "isSeries": true,
     "series_details": [
-      0
+      12,
+      13
     ],
     "actors": {
       "Tom Cruise": {
@@ -20,13 +21,16 @@
   },
   "Cinderella": {
     "id?": "Cinderella",
-    "name": "Cinderella2",
-    "picture": "https://blog.meshagency.com/wp-content/uploads/2015/07/Party-Minions1.jpg",
+    "name": "Snow White",
+    "picture": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.jxvLRPBlK902Jfu4saHfXAHaJM%26pid%3DApi&f=1",
     "director": "director name2",
-    "date": "07-08-2022",
-    "rating": 1,
-    "isSeries": false,
-    "series_details": [],
+    "date": "01-10-2022",
+    "rating": 4,
+    "isSeries": true,
+    "series_details": [
+      12,
+      13
+    ],
     "actors": {
       "actor_1_name": {
         "name?": "actor_1_name",
@@ -49,7 +53,8 @@
     "rating": 4,
     "isSeries": true,
     "series_details": [
-      0
+      12,
+      13
     ],
     "actors": {
       "actor_2_name2": {
@@ -73,19 +78,36 @@
     "rating": 3,
     "isSeries": true,
     "series_details": [
-      12
+      0
     ],
     "actors": {}
   },
   "Test6": {
     "id?": "Test6",
-    "name": "fdafda",
+    "name": "Mullan",
+    "picture": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.jxvLRPBlK902Jfu4saHfXAHaJM%26pid%3DApi&f=1",
+    "director": "director name2",
+    "date": "01-10-2022",
+    "rating": 4,
+    "isSeries": true,
+    "series_details": [
+      12,
+      13
+    ],
+    "actors": {}
+  },
+  "Alice": {
+    "id?": "Alice",
+    "name": "Alice In Wonderland",
     "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "fdafd",
-    "date": "06-05-2022",
-    "rating": 3,
-    "isSeries": false,
-    "series_details": [],
+    "director": "Somedfgd",
+    "date": "26-05-2022",
+    "rating": 4,
+    "isSeries": true,
+    "series_details": [
+      10,
+      8
+    ],
     "actors": {}
   }
 }

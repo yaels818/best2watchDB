@@ -14,7 +14,7 @@ $(document).ready(function () {
     // Fill media table
     fillTable("default");
   
-    // 
+    // Forms - validate and submit
     $('#media_form').submit(function (event) {
 
         submitAddMedia();
@@ -164,6 +164,8 @@ function submitAddMedia(){
         is_series = true;
         series_details = $("#episodes_field").val().split(",");
 
+        console.log(series_details);
+
         // Fill series_details - length is number of seasons, each cell is number of episodes in season
         for (let i = 0; i < series_details.length; i++) {
             series_details[i] = Number(series_details[i]);
@@ -171,8 +173,12 @@ function submitAddMedia(){
     }
 
     console.log(series_details);
-    
-    /*
+    console.log($("#id_field").val());
+
+    // Form validation 
+    if ($("#id_field").value == "")
+        $("#id_field_error").innerHTML = "Please enter Media_ID";
+
     // Set validation restrictions for the form
     $("form[id='media_form']").validate({
         
@@ -196,22 +202,22 @@ function submitAddMedia(){
             required : true
         },
         "seasons_field":{
-            
-        },
-        "episodes_field":{
-            
-        }
+            digits : true
         },
         // Specify validation error messages
         messages: {       
-        id_field:{
-            minlength: "Your name must be at least 6 characters long"
+        name_field:{
+            text: "Please enter letters only."
         },
-        email: "email structure is some@domain "
+        director_field:{
+            text: "Please enter letters only."
+        },
+        seasons_field: "Please enter digits only."
         }
-    });
-    */
+    }});
     
+    if(!$("#user_form").valid()) return;
+
     // process the form
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -253,10 +259,7 @@ function openUpdateMedia(media_id){
     $("button.action_btn").attr("disabled", true);
     $("select").attr("disabled", true);
 
-    $("#update_seasons-group").hide();
-    $("#update_episodes-group").hide();
-
-    // Show these fields only when series checkbox is on
+    // Show these fields only if series checkbox is on
     $("#update_is_series_field").click(function () {
         if ($(this).is(":checked")) {
         $("#update_seasons-group").show();
