@@ -32,10 +32,9 @@
     </div>
 
     <div id="div_media_form"  class="form-popup">
-            <!-- OUR FORM -->
-            <form id="media_form"  class="form-container" method="POST" 
-            onsubmit="setTimeout(function () { window.location.reload(); }, 10)"
-            >
+            <!-- OUR FORM --> 
+            <form id="media_form"  class="form-container" method="POST">
+                <!-- onsubmit="setTimeout(function () { window.location.reload(); }, 10)" -->
 
                 <h1>Add New Media</h1>
                 
@@ -43,14 +42,12 @@
                 <div id="media-group" class="form-group">
                     <label for="id">Media ID</label>
                     <input type="text" class="form-control" id="id_field" placeholder="Write here..." required>
-                    <br><p id = id_field_error></p>
                 </div>
 
                 <!-- Media Name -->
                 <div id="name-group" class="form-group">
                     <label for="name">Media Name</label>
                     <input type="text" class="form-control" id="name_field" placeholder="Write here..." required>
-                    <br><p id = name_field_error></p>
                 </div>
 
                 <!-- Picture URL -->

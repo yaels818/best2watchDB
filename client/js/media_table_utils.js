@@ -175,10 +175,6 @@ function submitAddMedia(){
     console.log(series_details);
     console.log($("#id_field").val());
 
-    // Form validation 
-    if ($("#id_field").value == "")
-        $("#id_field_error").innerHTML = "Please enter Media_ID";
-
     // Set validation restrictions for the form
     $("form[id='media_form']").validate({
         
@@ -216,7 +212,7 @@ function submitAddMedia(){
         }
     }});
     
-    if(!$("#user_form").valid()) return;
+    if(!$("#media_form").valid()) return;
 
     // process the form
     $.ajax({
@@ -284,9 +280,6 @@ function openUpdateMedia(media_id){
     else{
         $("#update_is_series_field").attr('checked', false);
     }
-
-    console.log(date);
-    console.log(seasons);
 
     $("#update_name_field").val(media.name);
     $("#update_pic_url_field").val(media.picture);
