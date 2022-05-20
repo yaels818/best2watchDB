@@ -419,32 +419,6 @@ function validateUpdateMedia(){
     return true;
 }
 
-function validateAddActor(){
-
-    // Deeper Form Validation
-
-    var actor_name = $("#actor_name_field").val();
-
-    // Check if media_id already exists in JSON
-    mediaData.forEach(function (object) {
-
-        console.log(object["actors"].length);
-
-        for (let i = 0; i < object.actors.length; i++) {
-
-            console.log(object[i]["name?"]);
-
-            if (object[i]["name?"] == actor_name)
-            {
-                alert("Another actor with the same name already exists for this media.\n" +
-                    "Please add a different actor.");
-                return false;
-            }
-        } 
-    });
-
-    return true;
-}
 //--------------------------------------------------------------------------------
 
 function submitAddMedia(){
@@ -648,8 +622,6 @@ function submitAddActor()
     }});
     
     if(!$("#actor_form").valid()) return;
-
-    if (!validateAddActor()) return;
     
     //-------------------------------------------
 
