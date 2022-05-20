@@ -9,8 +9,9 @@ Delete - can't delete Test 1
 
 update movies - does update series but always with seasons = 0 - Yael
 validation for all fields - Yael
-clear all fields when open add media form - Yael
+
 
 DONE:
 disabled refresh (it was so the sort table would happen immediately after add/update media)
 validation for add_media_form
+clear all fields when open add media form - Yael

@@ -18,7 +18,6 @@ $(document).ready(function () {
     $('#media_form').submit(function (event) {
 
         submitAddMedia();
-
         // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
     });
@@ -132,17 +131,16 @@ function openAddMedia(){
     $("#episodes-group").hide();
 
     // Make all fields empty
-    /*
-    $("#id_field").val(media.name);
-    $("#update_name_field").val(media.name);
-    $("#update_pic_url_field").val(media.picture);
-    $("#update_director_field").val(media.director);
-    $("#update_date_field").val(date);
-    $("#update_rating_field").val(media.rating);
-    $("#update_seasons_field").val(seasons)
-    $("#update_episodes_field").val(media.series_details);
-    */
-
+    $("#id_field").val("");
+    $("#name_field").val("");
+    $("#pic_url_field").val("");
+    $("#director_field").val("");
+    $("#date_field").val("");
+    $("#rating_field").val(3);
+    $("#is_series_field").prop('checked', false);
+    $("#seasons_field").val("")
+    $("#episodes_field").val("");
+    
     // Show these fields only when series checkbox is on
     $("#is_series_field").click(function () {
         if ($(this).is(":checked")) {
