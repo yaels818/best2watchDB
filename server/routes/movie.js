@@ -31,7 +31,8 @@ module.exports = {
         fs.readFile(dataPath, 'utf8', (err, data) => {
             if (err) {
                 console.log(err);
-                res.sendStatus(500);                 
+                res.sendStatus(500);
+                return;                 
             }
             else
             {
@@ -44,7 +45,6 @@ module.exports = {
                 });
 
                 res.send(clientData);
-                // need to check if the sort word-> date + desc 
             }
                 
         });
@@ -54,7 +54,8 @@ module.exports = {
         fs.readFile(dataPath, 'utf8', (err, data) => {
             if (err) {
                 console.log(err);
-                res.sendStatus(500);                 
+                res.sendStatus(500);  
+                return;               
             }
             else
             {
@@ -65,8 +66,13 @@ module.exports = {
                 if (jsonData[movieId])
                 {
                     res.status(200).send(jsonData[movieId]);
+                    return;
                 }
-                else  res.status(400).send(`movie id:${movieId}  not found`);
+                else  
+                {
+                    res.status(400).send(`movie id:${movieId}  not found`);
+                    return;
+                }
             }
                 
         });
@@ -119,7 +125,7 @@ module.exports = {
             // get the movie
             const movieId = req.params.movie_id; 
             if (!data[movieId])
-                res.status(400).send(`movie id:${movieId}  not found`);
+                return res.status(400).send(`movie id:${movieId}  not found`);
 
             const details = req.body.movieDetails;
             const db = data[movieId];
@@ -153,7 +159,7 @@ module.exports = {
             // get the movie
             const movieId = req.params.movie_id; 
             if (!data[movieId])
-                res.status(400).send(`movie id:${movieId}  not found`);
+                return res.status(400).send(`movie id:${movieId}  not found`);
 
             const details = req.body.actorDetails;
             const db = data[movieId];
@@ -168,7 +174,7 @@ module.exports = {
             }
             else
             {
-                res.status(400).send(`movie id:${movieId}  not found`);
+                return res.status(400).send(`movie id:${movieId}  not found`);
             }
             
             const movie_details = {

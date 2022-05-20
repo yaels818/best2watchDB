@@ -10,9 +10,11 @@ $(document).ready(function () {
     $("#update_close_btn").click(closeUpdateMedia);
     $("#actor_close_btn").click(closeAddActor);
     $("#view_actor_close_btn").click(closeViewActor);
+    $("#sorts_list option").change(BuildTable);
 
     // Fill media table
     fillTable("default");
+    
   
     // Forms - validate and submit
     $('#media_form').submit(function (event) {
@@ -57,7 +59,11 @@ function fillTable(sort_kind)
 {
     // Get JSON data into mediaData
     GetList();
+    BuildTable(sort_kind);
+    
+}
 
+function BuildTable(sort_kind){
     let jsonObj;
 
     // Sort depending on what sort_kind was given 
@@ -113,8 +119,8 @@ function fillTable(sort_kind)
         tbody.appendChild(tr);
         table.appendChild(tbody);
     });
-}
 
+}
 //--------------------------------------------------------------------------------
 
 function openAddMedia(){

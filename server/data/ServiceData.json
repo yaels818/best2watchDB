@@ -23,11 +23,13 @@
     "id?": "Cinderella",
     "name": "Snow White",
     "picture": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.jxvLRPBlK902Jfu4saHfXAHaJM%26pid%3DApi&f=1",
-    "director": "director name2",
+    "director": "director name3",
     "date": "01-10-2022",
     "rating": 4,
     "isSeries": true,
-    "series_details": [],
+    "series_details": [
+      6
+    ],
     "actors": {
       "actor_1_name": {
         "name?": "actor_1_name",
