@@ -5,13 +5,12 @@ CLIENT:
 Update movies - close button still updates some of the details (everything except media_id) - Linoy
 Update movies - shows alert updated - Linoy
 
-Delete - can't delete Test 1
-
-update movies - does update series but always with seasons = 0 - Yael
-validation for all fields - Yael
+validation for new actor - Yael
 
 
 DONE:
 disabled refresh (it was so the sort table would happen immediately after add/update media)
 validation for add_media_form
+validation for update_media_form
 clear all fields when open add media form - Yael
+fixed update movies - does update series but always with seasons = 0 - Yael

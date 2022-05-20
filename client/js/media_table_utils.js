@@ -168,14 +168,16 @@ function openUpdateMedia(media_id){
 
     // Convert needed fields from json format
     var date = media.date.split("-").reverse().join("-");
-    var seasons = 0;
 
     if (media.isSeries == true){
-        $("#update_is_series_field").attr('checked', true);
-        seasons = media.series_details.length;
+        $("#update_is_series_field").prop('checked', true);
+        $("#update_seasons_field").val(media.series_details.length)
+        $("#update_episodes_field").val(media.series_details);
     }
     else{
-        $("#update_is_series_field").attr('checked', false);
+        $("#update_is_series_field").prop('checked', false);
+        $("#update_seasons_field").val("")
+        $("#update_episodes_field").val("");
     }
 
     $("#update_name_field").val(media.name);
@@ -183,8 +185,6 @@ function openUpdateMedia(media_id){
     $("#update_director_field").val(media.director);
     $("#update_date_field").val(date);
     $("#update_rating_field").val(media.rating);
-    $("#update_seasons_field").val(seasons)
-    $("#update_episodes_field").val(media.series_details);
 }
 
 function openAddActor(media_id){
@@ -195,6 +195,11 @@ function openAddActor(media_id){
     // Disable action buttons while media pop-up window is open
     $("button.action_btn").attr("disabled", true);
     $("select").attr("disabled", true);
+
+    // Make all fields empty
+    $("#actor_name_field").val("");
+    $("#actor_pic_url_field").val("");
+    $("#actor_page_url_field").val("");
 
     curr_update_media_id = media_id;
 }
@@ -253,8 +258,6 @@ function closeUpdateMedia(){
 
     $("button.action_btn").attr("disabled", false);
     $("select").attr("disabled", false);
-
-    //curr_update_media_id = null;
 }
 
 function closeAddActor(){
@@ -276,7 +279,8 @@ function closeViewActor(){
 
 function validateAddMedia(){
 
-    // Form Validation - get all fields
+    // Deeper Form Validation
+
     var media_id = $("#id_field").val();
 
     // Check if media_id already exists in JSON
@@ -346,6 +350,97 @@ function validateAddMedia(){
     return true;
 }
 
+function validateUpdateMedia(){
+
+    // Deeper Form Validation
+
+    // Check if this is a series => seasons and episodes were entered
+    if ($('#update_is_series_field').is(":checked"))
+    {
+        var seasons = $("#update_seasons_field").val();
+        var episodes = $("#update_episodes_field").val();
+
+        if (seasons == "")
+        {
+            alert("Media was checked as series but number of seasons is missing.\n" +
+                    "Please enter number of seasons.");
+            return false;
+        }
+
+        if (seasons == 0)
+        {
+            alert("Media was checked as series but number of seasons is 0.\n" +
+                    "Please enter uncheck series checkbox.");
+            return false;
+        }
+
+        if (episodes == "")
+        {
+            alert("Media was checked as series but number of episodes in each season is missing.\n" +
+                    "Please enter number of episodes for each season.");
+            return false;
+        }
+
+        if (episodes == 0)
+        {
+            alert("Media was checked as series but number of episodes in each season is 0.\n" +
+                    "Please enter a valid number of episodes for each season.");
+            return false;
+        }
+
+        // Check episodes match valid pattern
+        var episodes_str = $("#update_episodes_field").val();
+        if(episodes_str.match(/[a-z]/) || episodes_str.match(/[A-Z]/))
+        {
+            alert("Number of episodes field contain invalid characters.\n" +
+                "Please follow the pattern shown in the field, without letters or spaces, only digits and ','");
+            return false;
+        }
+
+        // Get series details
+        let series_details = [];
+        series_details = $("#update_episodes_field").val().split(",");
+
+        // Check episodes match number of seasons
+        if (series_details.length != seasons) 
+        {
+            alert("Media was checked as series but number of episodes in each season doesn't match number of seasons.\n" +
+                    "Please enter number of episodes for each season.");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function validateAddActor(){
+
+    // Deeper Form Validation
+
+    var actor_name = $("#actor_name_field").val();
+
+    // Check if media_id already exists in JSON
+    mediaData.forEach(function (object) {
+
+        console.log(object["actors"].length);
+
+        for (let i = 0; i < object.actors.length; i++) {
+
+            console.log(object[i]["name?"]);
+
+            if (object[i]["name?"] == actor_name)
+            {
+                alert("Another actor with the same name already exists for this media.\n" +
+                    "Please add a different actor.");
+                return false;
+            }
+        } 
+    });
+
+    return true;
+}
+//--------------------------------------------------------------------------------
+
 function submitAddMedia(){
     
     // Set validation restrictions for the form
@@ -376,9 +471,6 @@ function submitAddMedia(){
         },
         // Specify validation error messages
         messages: {       
-        name_field:{
-            text: "Please enter letters only."
-        },
         director_field:{
             text: "Please enter letters only."
         },
@@ -442,6 +534,47 @@ function submitAddMedia(){
 
 function submitUpdateMedia(){
 
+    // Set validation restrictions for the form
+    $("form[id='update_media_form']").validate({
+        
+        // Specify validation rules
+        rules: {
+        "update_name_field": {
+            required: true,
+            text: true
+        },
+        "update_pic_url_field":{
+            required: true,
+            url : true
+        },
+        "update_director_field":{
+            required: true,
+            text: true
+        },
+        "update_date_field":{
+            required : true
+        },
+        "update_seasons_field":{
+            digits : true
+        },
+        // Specify validation error messages
+        messages: {       
+        director_field:{
+            text: "Please enter letters only."
+        },
+        date_field: {
+            required : "Please pick a date."
+        },
+        seasons_field: "Please enter digits only."
+        }
+    }});
+    
+    if(!$("#update_media_form").valid()) return;
+
+    if (!validateUpdateMedia()) return;
+    
+    //-------------------------------------------
+
     // Convert needed fields to match json format
     var is_series = false;
     let series_details = [];
@@ -449,7 +582,7 @@ function submitUpdateMedia(){
     if ($('#update_is_series_field').is(":checked"))
     {
         is_series = true;
-        series_details = $("#episodes_field").val().split(",");
+        series_details = $("#update_episodes_field").val().split(",");
 
         for (let i = 0; i < series_details.length; i++) {
             series_details[i] = Number(series_details[i]);
@@ -476,7 +609,6 @@ function submitUpdateMedia(){
         processData: false,            
         encode: true,
         success: function( data, textStatus, jQxhr ){
-            //console.log(data);
             alert("media updated!");
             closeUpdateMedia();
             fillTable("default");
@@ -490,6 +622,31 @@ function submitUpdateMedia(){
 
 function submitAddActor()
 {
+    // Set validation restrictions for the form
+    $("form[id='actor_form']").validate({
+        
+        // Specify validation rules
+        rules: {
+        "actor_name_field": {
+            required: true,
+            text: true
+        },
+        "actor_pic_url_field":{
+            required: true,
+            url : true
+        },
+        "actor_page_url_field":{
+            required: true,
+            url: true
+        }
+    }});
+    
+    if(!$("#actor_form").valid()) return;
+
+    if (!validateAddActor()) return;
+    
+    //-------------------------------------------
+
     $.ajax({
         type: 'PUT', 
           url: '/actor/'+curr_update_media_id, 

@@ -8,7 +8,8 @@
     "rating": 4,
     "isSeries": true,
     "series_details": [
-      0
+      12,
+      13
     ],
     "actors": {
       "Tom Cruise": {
@@ -26,10 +27,7 @@
     "date": "01-10-2022",
     "rating": 4,
     "isSeries": true,
-    "series_details": [
-      12,
-      13
-    ],
+    "series_details": [],
     "actors": {
       "actor_1_name": {
         "name?": "actor_1_name",
@@ -51,119 +49,18 @@
     "date": "26-05-2022",
     "rating": 4,
     "isSeries": true,
-    "series_details": [
-      10,
-      8
-    ],
+    "series_details": [],
     "actors": {}
   },
-  "Test 1": {
-    "id?": "Test 1",
-    "name": "123122",
+  "TestSeries": {
+    "id?": "TestSeries",
+    "name": "Hanna",
     "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "Some Dude",
-    "date": "26-05-2022",
-    "rating": 4,
-    "isSeries": true,
-    "series_details": [
-      12,
-      13
-    ],
-    "actors": {}
-  },
-  "TestSeries1": {
-    "id?": "TestSeries1",
-    "name": "fdaf",
-    "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "hj",
-    "date": "11-05-2022",
-    "rating": 3,
-    "isSeries": true,
-    "series_details": [
-      9
-    ],
-    "actors": {}
-  },
-  "TestSeries2": {
-    "id?": "TestSeries2",
-    "name": "fdaf",
-    "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "hj",
-    "date": "11-05-2022",
-    "rating": 3,
-    "isSeries": true,
-    "series_details": [
-      9
-    ],
-    "actors": {}
-  },
-  "TestSeries3": {
-    "id?": "TestSeries3",
-    "name": "fdaf",
-    "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "hj",
-    "date": "11-05-2022",
-    "rating": 3,
-    "isSeries": true,
-    "series_details": [
-      null
-    ],
-    "actors": {}
-  },
-  "TestSeries5": {
-    "id?": "TestSeries5",
-    "name": "fdaf",
-    "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "hj",
-    "date": "11-05-2022",
-    "rating": 3,
-    "isSeries": true,
-    "series_details": [
-      null,
-      null
-    ],
-    "actors": {}
-  },
-  "TestSeries6": {
-    "id?": "TestSeries6",
-    "name": "fdaf",
-    "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "hj",
-    "date": "11-05-2022",
-    "rating": 3,
-    "isSeries": true,
-    "series_details": [
-      null,
-      null
-    ],
-    "actors": {}
-  },
-  "TestSeries7": {
-    "id?": "TestSeries7",
-    "name": "fdaf",
-    "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "hj",
-    "date": "11-05-2022",
-    "rating": 3,
-    "isSeries": true,
-    "series_details": [
-      null,
-      null
-    ],
-    "actors": {}
-  },
-  "TestSeries8": {
-    "id?": "TestSeries8",
-    "name": "fdaf",
-    "picture": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-mYUWqp-zrxQ%2FUFFGs2jytbI%2FAAAAAAAAAp8%2FbqTwGteOI8g%2Fs1600%2FPocahontas-Disney-Princess.jpg&f=1&nofb=1",
-    "director": "hj",
-    "date": "11-05-2022",
-    "rating": 3,
-    "isSeries": true,
-    "series_details": [
-      5,
-      6
-    ],
+    "director": "dsaf",
+    "date": "04-05-2022",
+    "rating": 5,
+    "isSeries": false,
+    "series_details": [],
     "actors": {}
   }
 }
