@@ -116,7 +116,8 @@ function fillTable(sort_kind)
     });
 }
 
-// Open add media pop-up window
+//--------------------------------------------------------------------------------
+
 function openAddMedia(){
 
     // Display side window
@@ -130,6 +131,18 @@ function openAddMedia(){
     $("#seasons-group").hide();
     $("#episodes-group").hide();
 
+    // Make all fields empty
+    /*
+    $("#id_field").val(media.name);
+    $("#update_name_field").val(media.name);
+    $("#update_pic_url_field").val(media.picture);
+    $("#update_director_field").val(media.director);
+    $("#update_date_field").val(date);
+    $("#update_rating_field").val(media.rating);
+    $("#update_seasons_field").val(seasons)
+    $("#update_episodes_field").val(media.series_details);
+    */
+
     // Show these fields only when series checkbox is on
     $("#is_series_field").click(function () {
         if ($(this).is(":checked")) {
@@ -139,10 +152,93 @@ function openAddMedia(){
         $("#seasons-group").hide();
         $("#episodes-group").hide();
     }
-});
+    });
 }
 
-// Close add media pop-up window
+function openUpdateMedia(media_id){
+
+    // Display side window
+    let element = document.getElementById("div_update_media_form")
+    element.style.display = "block";
+
+    // Disable action buttons while media pop-up window is open
+    $("button.action_btn").attr("disabled", true);
+    $("select").attr("disabled", true);
+
+    curr_update_media_id = media_id;
+    let media = mediaData.find(x => x[Object.keys(x)[0]] === media_id);
+
+    // Convert needed fields from json format
+    var date = media.date.split("-").reverse().join("-");
+    var seasons = 0;
+
+    if (media.isSeries == true){
+        $("#update_is_series_field").attr('checked', true);
+        seasons = media.series_details.length;
+    }
+    else{
+        $("#update_is_series_field").attr('checked', false);
+    }
+
+    $("#update_name_field").val(media.name);
+    $("#update_pic_url_field").val(media.picture);
+    $("#update_director_field").val(media.director);
+    $("#update_date_field").val(date);
+    $("#update_rating_field").val(media.rating);
+    $("#update_seasons_field").val(seasons)
+    $("#update_episodes_field").val(media.series_details);
+}
+
+function openAddActor(media_id){
+    
+    let element = document.getElementById("div_actor_form")
+    element.style.display = "block";
+
+    // Disable action buttons while media pop-up window is open
+    $("button.action_btn").attr("disabled", true);
+    $("select").attr("disabled", true);
+
+    curr_update_media_id = media_id;
+}
+
+function openViewActors(media_id)
+{
+    curr_update_media_id= media_id;
+
+    let element = document.getElementById("div_view_actor_form")
+    element.style.display = "block";
+
+    // Disable action buttons while media pop-up window is open
+    $("button.action_btn").attr("disabled", true);
+    $("select").attr("disabled", true);
+
+    var table = document.getElementById("actorsTB");
+
+    table.innerHTML = "<thead><tr> <th>Name</th> <th>Picture</th> <th>Page</th> <th>Action</th> </tr></thead>";
+
+    $.ajax({
+        url: "/list/"+media_id,
+        success: function (result) {
+
+            let actors = result.actors;
+
+            $.each(actors, function(index, value) {
+                var tr = document.createElement('tr');
+                tr.innerHTML =  '<td>' + value["name?"] + '</td>' +
+                                '<td>' + '<img src = "' + value["picture"] + '"/img>' + '</td>' +
+                                '<td>' + '<img src = "' + value["site"] + '"/img>' + '</td>' +
+                                '<td>'+ "<button id = \"" + media_id + "_" + value["name?"] + "_removeActor" + "\" onclick = removeActor(\""+value["name?"]+"\") > delete </button></td>";
+        
+                table.appendChild(tr);
+            }); 
+        },
+        error: function (err) {
+          console.log("err", err);
+        }
+      });
+}
+//--------------------------------------------------------------------------------
+
 function closeAddMedia(){
 
     let element = document.getElementById("div_media_form")
@@ -152,29 +248,108 @@ function closeAddMedia(){
     $("select").attr("disabled", false);
 }
 
-// Submit add media form, close pop-up window and refresh table
-function submitAddMedia(){
-    
-    // Convert needed fields to match json format
-    var is_series = false;
-    let series_details = [];
+function closeUpdateMedia(){ 
 
+    let element = document.getElementById("div_update_media_form")
+    element.style.display = "none";
+
+    $("button.action_btn").attr("disabled", false);
+    $("select").attr("disabled", false);
+
+    //curr_update_media_id = null;
+}
+
+function closeAddActor(){
+    let element = document.getElementById("div_actor_form")
+    element.style.display = "none";
+
+    $("button.action_btn").attr("disabled", false);
+    $("select").attr("disabled", false);
+}
+
+function closeViewActor(){
+    let element = document.getElementById("div_view_actor_form")
+    element.style.display = "none";
+
+    $("button.action_btn").attr("disabled", false);
+    $("select").attr("disabled", false);
+}
+//--------------------------------------------------------------------------------
+
+function validateAddMedia(){
+
+    // Form Validation - get all fields
+    var media_id = $("#id_field").val();
+
+    // Check if media_id already exists in JSON
+    mediaData.forEach(function (object) {
+        if (object["id?"] == media_id)
+            alert("Another media with the same ID already exists.\n" +
+                    "Please pick another ID.");
+            return false;
+    });
+
+    // Check if this is a series => seasons and episodes were entered
     if ($('#is_series_field').is(":checked"))
     {
-        is_series = true;
+        var seasons = $("#seasons_field").val();
+        var episodes = $("#episodes_field").val();
+
+        if (seasons == "")
+        {
+            alert("Media was checked as series but number of seasons is missing.\n" +
+                    "Please enter number of seasons.");
+            return false;
+        }
+
+        if (seasons == 0)
+        {
+            alert("Media was checked as series but number of seasons is 0.\n" +
+                    "Please enter uncheck series checkbox.");
+            return false;
+        }
+
+        if (episodes == "")
+        {
+            alert("Media was checked as series but number of episodes in each season is missing.\n" +
+                    "Please enter number of episodes for each season.");
+            return false;
+        }
+
+        if (episodes == 0)
+        {
+            alert("Media was checked as series but number of episodes in each season is 0.\n" +
+                    "Please enter a valid number of episodes for each season.");
+            return false;
+        }
+
+        // Check episodes match valid pattern
+        var episodes_str = $("#episodes_field").val();
+        if(episodes_str.match(/[a-z]/) || episodes_str.match(/[A-Z]/))
+        {
+            alert("Number of episodes field contain invalid characters.\n" +
+                "Please follow the pattern shown in the field, without letters or spaces, only digits and ','");
+            return false;
+        }
+
+        // Get series details
+        let series_details = [];
         series_details = $("#episodes_field").val().split(",");
 
-        console.log(series_details);
-
-        // Fill series_details - length is number of seasons, each cell is number of episodes in season
-        for (let i = 0; i < series_details.length; i++) {
-            series_details[i] = Number(series_details[i]);
-        } 
+        // Check episodes match number of seasons
+        if (series_details.length != seasons) 
+        {
+            alert("Media was checked as series but number of episodes in each season doesn't match number of seasons.\n" +
+                    "Please enter number of episodes for each season.");
+            return false;
+        }
     }
 
-    console.log(series_details);
-    console.log($("#id_field").val());
+    return true;
+}
 
+function submitAddMedia(){
+    
     // Set validation restrictions for the form
     $("form[id='media_form']").validate({
         
@@ -188,7 +363,8 @@ function submitAddMedia(){
             text: true
         },
         "pic_url_field":{
-            required: true
+            required: true,
+            url : true
         },
         "director_field":{
             required: true,
@@ -208,11 +384,33 @@ function submitAddMedia(){
         director_field:{
             text: "Please enter letters only."
         },
+        date_field: {
+            required : "Please pick a date."
+        },
         seasons_field: "Please enter digits only."
         }
     }});
     
     if(!$("#media_form").valid()) return;
+
+    if (!validateAddMedia()) return;
+    
+    //-------------------------------------------
+
+    // Convert needed fields to match json format
+    var is_series = false;
+    let series_details = [];
+
+    if ($('#is_series_field').is(":checked"))
+    {
+        is_series = true;
+        series_details = $("#episodes_field").val().split(",");
+
+        // Fill series_details - length is number of seasons, each cell is number of episodes in season
+        for (let i = 0; i < series_details.length; i++) {
+            series_details[i] = Number(series_details[i]);
+        } 
+    }
 
     // process the form
     $.ajax({
@@ -244,63 +442,6 @@ function submitAddMedia(){
     })
 }
 
-// Open update media pop-up window filled with data from json file
-function openUpdateMedia(media_id){
-
-    curr_update_media_id = media_id;
-    let element = document.getElementById("div_update_media_form")
-    element.style.display = "block";
-
-    // Disable action buttons while media pop-up window is open
-    $("button.action_btn").attr("disabled", true);
-    $("select").attr("disabled", true);
-
-    // Show these fields only if series checkbox is on
-    $("#update_is_series_field").click(function () {
-        if ($(this).is(":checked")) {
-        $("#update_seasons-group").show();
-        $("#update_episodes-group").show();
-        } else {
-        $("#update_seasons-group").hide();
-        $("#update_episodes-group").hide();
-    }
-    });
-
-    let media = mediaData.find(x => x[Object.keys(x)[0]] === media_id);
-
-    // Convert needed fields from json format
-    
-    var date = media.date.split("-").reverse().join("-");
-    var seasons = 0;
-
-    if (media.isSeries == true){
-        $("#update_is_series_field").attr('checked', true);
-        seasons = media.series_details.length;
-    }
-    else{
-        $("#update_is_series_field").attr('checked', false);
-    }
-
-    $("#update_name_field").val(media.name);
-    $("#update_pic_url_field").val(media.picture);
-    $("#update_director_field").val(media.director);
-    $("#update_date_field").val(date);
-    $("#update_rating_field").val(media.rating);
-    $("#update_seasons_field").val(seasons)
-    $("#update_episodes_field").val(media.series_details);
-}
-
-// Close update media pop-up window
-function closeUpdateMedia(){
-
-    let element = document.getElementById("div_update_media_form")
-    element.style.display = "none";
-
-    $("button.action_btn").attr("disabled", false);
-    $("select").attr("disabled", false);
-}
-
-// Submit update media form, close pop-up window and refresh table
 function submitUpdateMedia(){
 
     // Convert needed fields to match json format
@@ -349,24 +490,6 @@ function submitUpdateMedia(){
     })
 }
 
-function openAddActor(media_id){
-    curr_update_media_id = media_id;
-    let element = document.getElementById("div_actor_form")
-    element.style.display = "block";
-
-    // Disable action buttons while media pop-up window is open
-    $("button.action_btn").attr("disabled", true);
-    $("select").attr("disabled", true);
-}
-
-function closeAddActor(){
-    let element = document.getElementById("div_actor_form")
-    element.style.display = "none";
-
-    $("button.action_btn").attr("disabled", false);
-    $("select").attr("disabled", false);
-}
-
 function submitAddActor()
 {
     $.ajax({
@@ -394,52 +517,7 @@ function submitAddActor()
         }
       });
 }
-
-function openViewActors(media_id)
-{
-    curr_update_media_id= media_id;
-
-    let element = document.getElementById("div_view_actor_form")
-    element.style.display = "block";
-
-    // Disable action buttons while media pop-up window is open
-    $("button.action_btn").attr("disabled", true);
-    $("select").attr("disabled", true);
-
-    var table = document.getElementById("actorsTB");
-
-    table.innerHTML = "<thead><tr> <th>Name</th> <th>Picture</th> <th>Page</th> <th>Action</th> </tr></thead>";
-
-    $.ajax({
-        url: "/list/"+media_id,
-        success: function (result) {
-
-            let actors = result.actors;
-
-            $.each(actors, function(index, value) {
-                var tr = document.createElement('tr');
-                tr.innerHTML =  '<td>' + value["name?"] + '</td>' +
-                                '<td>' + '<img src = "' + value["picture"] + '"/img>' + '</td>' +
-                                '<td>' + '<img src = "' + value["site"] + '"/img>' + '</td>' +
-                                '<td>'+ "<button id = \"" + media_id + "_" + value["name?"] + "_removeActor" + "\" onclick = removeActor(\""+value["name?"]+"\") > delete </button></td>";
-        
-                table.appendChild(tr);
-            }); 
-        },
-        error: function (err) {
-          console.log("err", err);
-        }
-      });
-}
-
-function closeViewActor(){
-    let element = document.getElementById("div_view_actor_form")
-    element.style.display = "none";
-
-    $("button.action_btn").attr("disabled", false);
-    $("select").attr("disabled", false);
-}
-
+//--------------------------------------------------------------------------------
 function removeMedia(media_id)
 {
     let media = mediaData.find(x => x[Object.keys(x)[0]] === media_id);
@@ -447,7 +525,7 @@ function removeMedia(media_id)
     if (confirm('Are you sure you want to delete '+ media.name +'?')) {
         $.ajax({
             type: 'DELETE', // define the type of HTTP verb we want to use (POST for our form)
-              url: '/movie/'+media_id, // the url where we want to POST
+              url: '/movie/'+ media_id, // the url where we want to POST
               contentType: 'application/json',
             success: function (result) {
                 alert("media deleted");
