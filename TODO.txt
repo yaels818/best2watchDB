@@ -1,15 +1,13 @@
 SERVER:
+--------
+* 2 functions
+* connection to DB
+* mongoose validations
 
 CLIENT:
-
-validation for new actor - Yael
+--------
+* add actor form
+* add actor to media from drop down list
 
 
 DONE:
-disabled refresh (it was so the sort table would happen immediately after add/update media)
-validation for add_media_form
-validation for update_media_form
-clear all fields when open add media form - Yael
-fixed update movies - does update series but always with seasons = 0 - Yael
-Update movies - close button still updates some of the details (everything except media_id) - Linoy
-Update movies - shows alert updated - Linoy
