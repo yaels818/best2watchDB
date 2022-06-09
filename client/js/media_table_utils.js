@@ -7,9 +7,16 @@ $(document).ready(function () {
     $("#addMedia_btn_1").click(openAddMedia);
     $("#addMedia_btn_2").click(openAddMedia);
     $("#close_btn").click(closeAddMedia);
-    $("#update_close_btn").click(closeUpdateMedia);
+    
+
+    $("#addActor_btn_1").click(openAddActor);
+    $("#addActor_btn_2").click(openAddActor);
     $("#actor_close_btn").click(closeAddActor);
+
+    $("#update_close_btn").click(closeUpdateMedia);
+    $("#add_actor_to_media_close_btn").click(closeAddActorToMedia);
     $("#view_actor_close_btn").click(closeViewActor);
+
     $("#sorts_list option").change(BuildTable);
 
     // Fill media table
@@ -112,7 +119,7 @@ function BuildTable(sort_kind){
                         '<td>' + object["rating"] + '</td>' +
                         '<td>' + object["date"] + '</td>'+
                         '<td>' + "<button class = \"action_btn\" id = \"" + object["id?"] + "_updateMedia" + "\" onclick = openUpdateMedia(\""+object["id?"]+"\") > Update </button>" +
-                        "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "_addActor" + "\" onclick = openAddActor(\""+object["id?"]+"\") > Add Actor </button>" +
+                        "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "_addActorToMedia" + "\" onclick = openAddActorToMedia(\""+object["id?"]+"\") > Add Actor </button>" +
                         "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "_viewActors" + "\" onclick = openViewActors(\""+object["id?"]+"\") > View Actors </button>" +
                         "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "\" onclick = removeMedia(\""+object["id?"]+"\") > Remove Media </button>" + "</td>";
 
@@ -132,6 +139,7 @@ function openAddMedia(){
     // Disable action buttons while media pop-up window is open
     $("button.action_btn").attr("disabled", true);
     $("select").attr("disabled", true);
+    $("button.add_actor_button").attr("disabled", true);
 
     $("#seasons-group").hide();
     $("#episodes-group").hide();
@@ -168,6 +176,7 @@ function openUpdateMedia(media_id){
     // Disable action buttons while media pop-up window is open
     $("button.action_btn").attr("disabled", true);
     $("select").attr("disabled", true);
+    $("button.add_actor_button").attr("disabled", true);
 
     curr_update_media_id = media_id;
     let media = mediaData.find(x => x[Object.keys(x)[0]] === media_id);
@@ -208,6 +217,43 @@ function openAddActor(media_id){
     $("#actor_page_url_field").val("");
 
     curr_update_media_id = media_id;
+}
+
+function openAddActorToMedia(media_id){
+    
+    curr_update_media_id= media_id;
+
+    let element = document.getElementById("div_add_actor_to_media_form")
+    element.style.display = "block";
+
+    // Disable action buttons while media pop-up window is open
+    $("button.action_btn").attr("disabled", true);
+    $("select").attr("disabled", true);
+
+    var table = document.getElementById("actorsTB");
+
+    table.innerHTML = "<thead><tr> <th>Name</th> <th>Picture</th> <th>Page</th> <th>Action</th> </tr></thead>";
+
+    $.ajax({
+        url: "/list/"+media_id,
+        success: function (result) {
+
+            let actors = result.actors;
+
+            $.each(actors, function(index, value) {
+                var tr = document.createElement('tr');
+                tr.innerHTML =  '<td>' + value["name?"] + '</td>' +
+                                '<td>' + '<img src = "' + value["picture"] + '"/img>' + '</td>' +
+                                '<td>' + '<img src = "' + value["site"] + '"/img>' + '</td>' +
+                                '<td>'+ "<button id = \"" + media_id + "_" + value["name?"] + "_removeActor" + "\" onclick = removeActor(\""+value["name?"]+"\") > delete </button></td>";
+        
+                table.appendChild(tr);
+            }); 
+        },
+        error: function (err) {
+          console.log("err", err);
+        }
+      });
 }
 
 function openViewActors(media_id)
@@ -255,6 +301,8 @@ function closeAddMedia(){
 
     $("button.action_btn").attr("disabled", false);
     $("select").attr("disabled", false);
+    $("button.add_actor_button").attr("disabled", false);
+
 }
 
 function closeUpdateMedia(){ 
@@ -264,10 +312,19 @@ function closeUpdateMedia(){
 
     $("button.action_btn").attr("disabled", false);
     $("select").attr("disabled", false);
+    $("button.add_actor_button").attr("disabled", false);
 }
 
 function closeAddActor(){
     let element = document.getElementById("div_actor_form")
+    element.style.display = "none";
+
+    $("button.action_btn").attr("disabled", false);
+    $("select").attr("disabled", false);
+}
+
+function closeAddActorToMedia(){
+    let element = document.getElementById("div_add_actor_to_media_form")
     element.style.display = "none";
 
     $("button.action_btn").attr("disabled", false);

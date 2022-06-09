@@ -6,7 +6,7 @@ SERVER:
 
 CLIENT:
 --------
-* add actor form
+* add new actor form
 * add actor to media from drop down list
 
 

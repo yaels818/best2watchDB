@@ -15,9 +15,11 @@
 <body>
     <div class = "media_container">
         <button id = "addMedia_btn_1" class = "add_media_button">Add Media</button>
+        <button id = "addActor_btn_1" class = "add_actor_button">Add Actor</button>
         <br>
         <table id = "listMediaTB", class = "sortable"></table>
         <button id = "addMedia_btn_2" class = "add_media_button">Add Media</button>
+        <button id = "addActor_btn_2" class = "add_actor_button">Add Actor</button>
     </div>
 
     <div class = "div_sort_table">
@@ -208,6 +210,24 @@
             <button id="actor_close_btn" type="button" class="btn_close">Close</button>
 
         </form>
+    </div>
+
+    <div id="div_add_actor_to_media_form"  class="form-popup">
+        <div id="div_add_actor_to_media_form_container", class = "form-container">
+            <h1> Add Actor To Media </h1>
+            <br>
+            <table id = "actorsTB", class = "form-container">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Picture</th>
+                        <th>Page</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+            <button id = "add_actor_to_media_close_btn" class = "btn_close">close</button>
+        </div>
     </div>
 
     <div id="div_view_actor_form"  class="form-popup">
