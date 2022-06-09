@@ -228,32 +228,7 @@ function openAddActorToMedia(media_id){
 
     // Disable action buttons while media pop-up window is open
     $("button.action_btn").attr("disabled", true);
-    $("select").attr("disabled", true);
-
-    var table = document.getElementById("actorsTB");
-
-    table.innerHTML = "<thead><tr> <th>Name</th> <th>Picture</th> <th>Page</th> <th>Action</th> </tr></thead>";
-
-    $.ajax({
-        url: "/list/"+media_id,
-        success: function (result) {
-
-            let actors = result.actors;
-
-            $.each(actors, function(index, value) {
-                var tr = document.createElement('tr');
-                tr.innerHTML =  '<td>' + value["name?"] + '</td>' +
-                                '<td>' + '<img src = "' + value["picture"] + '"/img>' + '</td>' +
-                                '<td>' + '<img src = "' + value["site"] + '"/img>' + '</td>' +
-                                '<td>'+ "<button id = \"" + media_id + "_" + value["name?"] + "_removeActor" + "\" onclick = removeActor(\""+value["name?"]+"\") > delete </button></td>";
-        
-                table.appendChild(tr);
-            }); 
-        },
-        error: function (err) {
-          console.log("err", err);
-        }
-      });
+    $("#sorts_list").attr("disabled", true);
 }
 
 function openViewActors(media_id)
@@ -706,6 +681,36 @@ function submitAddActor()
             alert("actor not updated!");
         }
       });
+}
+
+function submitAddActorToMedia()
+{
+    /*
+    $.ajax({
+        type: 'PUT', 
+          url: '/actor/'+curr_update_media_id, 
+          contentType: 'application/json',
+          data: JSON.stringify({
+            "movie_id": curr_update_media_id,
+            "actorDetails":{
+              "name": $("#actor_name_field").val(),
+              "picture": $("#actor_pic_url_field").val(),
+              "site" : $("#actor_page_url_field").val(),
+              }
+          }),
+          processData: false,            
+          encode: true,
+        success: function( data, textStatus, jQxhr ){
+            //console.log(data);
+            alert("actor updated!");
+            closeAddActor();
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+            alert("actor not updated!");
+        }
+      });
+      */
 }
 //--------------------------------------------------------------------------------
 function removeMedia(media_id)
