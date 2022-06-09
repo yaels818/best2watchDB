@@ -173,6 +173,21 @@ function openAddMedia(){
     });
 }
 
+function openAddActor(){
+    
+    let element = document.getElementById("div_actor_form")
+    element.style.display = "block";
+
+    // Disable action buttons while media pop-up window is open
+    $("button.action_btn").attr("disabled", true);
+    $("select").attr("disabled", true);
+
+    // Make all fields empty
+    $("#actor_name_field").val("");
+    $("#actor_pic_url_field").val("");
+    $("#actor_page_url_field").val("");
+}
+
 function openUpdateMedia(media_id){
 
     // Display side window
@@ -206,23 +221,6 @@ function openUpdateMedia(media_id){
     $("#update_director_field").val(media.director);
     $("#update_date_field").val(date);
     $("#update_rating_field").val(media.rating);
-}
-
-function openAddActor(media_id){
-    
-    let element = document.getElementById("div_actor_form")
-    element.style.display = "block";
-
-    // Disable action buttons while media pop-up window is open
-    $("button.action_btn").attr("disabled", true);
-    $("select").attr("disabled", true);
-
-    // Make all fields empty
-    $("#actor_name_field").val("");
-    $("#actor_pic_url_field").val("");
-    $("#actor_page_url_field").val("");
-
-    curr_update_media_id = media_id;
 }
 
 function openAddActorToMedia(media_id){
@@ -286,6 +284,14 @@ function closeAddMedia(){
 
 }
 
+function closeAddActor(){
+    let element = document.getElementById("div_actor_form")
+    element.style.display = "none";
+
+    $("button.action_btn").attr("disabled", false);
+    $("select").attr("disabled", false);
+}
+
 function closeUpdateMedia(){ 
 
     let element = document.getElementById("div_update_media_form")
@@ -294,14 +300,6 @@ function closeUpdateMedia(){
     $("button.action_btn").attr("disabled", false);
     $("select").attr("disabled", false);
     $("button.add_actor_button").attr("disabled", false);
-}
-
-function closeAddActor(){
-    let element = document.getElementById("div_actor_form")
-    element.style.display = "none";
-
-    $("button.action_btn").attr("disabled", false);
-    $("select").attr("disabled", false);
 }
 
 function closeAddActorToMedia(){
@@ -550,6 +548,87 @@ function submitAddMedia(){
     })
 }
 
+function submitAddActor()
+{
+    // Set validation restrictions for the form
+    $("form[id='actor_form']").validate({
+        
+        // Specify validation rules
+        rules: {
+        "actor_name_field": {
+            required: true,
+            text: true
+        },
+        "actor_pic_url_field":{
+            required: true,
+            url : true
+        },
+        "actor_page_url_field":{
+            required: true,
+            url: true
+        }
+    }});
+    
+    if(!$("#actor_form").valid()) return;
+    
+    //-------------------------------------------
+
+    $.ajax({
+        type: 'PUT', 
+          url: '/actor/'+curr_update_media_id, 
+          contentType: 'application/json',
+          data: JSON.stringify({
+            "movie_id": curr_update_media_id,
+            "actorDetails":{
+              "name": $("#actor_name_field").val(),
+              "picture": $("#actor_pic_url_field").val(),
+              "site" : $("#actor_page_url_field").val(),
+              }
+          }),
+          processData: false,            
+          encode: true,
+        success: function( data, textStatus, jQxhr ){
+            //console.log(data);
+            alert("actor updated!");
+            closeAddActor();
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+            alert("actor not updated!");
+        }
+      });
+}
+
+function submitAddActorToMedia()
+{
+    /*
+    $.ajax({
+        type: 'PUT', 
+          url: '/actor/'+curr_update_media_id, 
+          contentType: 'application/json',
+          data: JSON.stringify({
+            "movie_id": curr_update_media_id,
+            "actorDetails":{
+              "name": $("#actor_name_field").val(),
+              "picture": $("#actor_pic_url_field").val(),
+              "site" : $("#actor_page_url_field").val(),
+              }
+          }),
+          processData: false,            
+          encode: true,
+        success: function( data, textStatus, jQxhr ){
+            //console.log(data);
+            alert("actor updated!");
+            closeAddActor();
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+            alert("actor not updated!");
+        }
+      });
+      */
+}
+
 function submitUpdateMedia(){
 
     // Set validation restrictions for the form
@@ -636,87 +715,6 @@ function submitUpdateMedia(){
             alert("media not updated!");
         }
     })
-}
-
-function submitAddActor()
-{
-    // Set validation restrictions for the form
-    $("form[id='actor_form']").validate({
-        
-        // Specify validation rules
-        rules: {
-        "actor_name_field": {
-            required: true,
-            text: true
-        },
-        "actor_pic_url_field":{
-            required: true,
-            url : true
-        },
-        "actor_page_url_field":{
-            required: true,
-            url: true
-        }
-    }});
-    
-    if(!$("#actor_form").valid()) return;
-    
-    //-------------------------------------------
-
-    $.ajax({
-        type: 'PUT', 
-          url: '/actor/'+curr_update_media_id, 
-          contentType: 'application/json',
-          data: JSON.stringify({
-            "movie_id": curr_update_media_id,
-            "actorDetails":{
-              "name": $("#actor_name_field").val(),
-              "picture": $("#actor_pic_url_field").val(),
-              "site" : $("#actor_page_url_field").val(),
-              }
-          }),
-          processData: false,            
-          encode: true,
-        success: function( data, textStatus, jQxhr ){
-            //console.log(data);
-            alert("actor updated!");
-            closeAddActor();
-        },
-        error: function (jqXhr, textStatus, errorThrown) {
-            console.log(errorThrown);
-            alert("actor not updated!");
-        }
-      });
-}
-
-function submitAddActorToMedia()
-{
-    /*
-    $.ajax({
-        type: 'PUT', 
-          url: '/actor/'+curr_update_media_id, 
-          contentType: 'application/json',
-          data: JSON.stringify({
-            "movie_id": curr_update_media_id,
-            "actorDetails":{
-              "name": $("#actor_name_field").val(),
-              "picture": $("#actor_pic_url_field").val(),
-              "site" : $("#actor_page_url_field").val(),
-              }
-          }),
-          processData: false,            
-          encode: true,
-        success: function( data, textStatus, jQxhr ){
-            //console.log(data);
-            alert("actor updated!");
-            closeAddActor();
-        },
-        error: function (jqXhr, textStatus, errorThrown) {
-            console.log(errorThrown);
-            alert("actor not updated!");
-        }
-      });
-      */
 }
 //--------------------------------------------------------------------------------
 function removeMedia(media_id)
