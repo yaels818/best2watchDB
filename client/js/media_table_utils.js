@@ -42,6 +42,12 @@ $(document).ready(function () {
         // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
     });
+
+    $('#add_actor_to_media_form').submit(function (event) {
+        submitAddActorToMedia();
+        // stop the form from submitting the normal way and refreshing the page
+        event.preventDefault();
+    });
 });
 
 // Call JSON file
