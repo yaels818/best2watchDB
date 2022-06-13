@@ -5,7 +5,7 @@ SERVER:
 
 CLIENT:
 --------
-* add actor form
+* add new actor form
 * add actor to media from drop down list
 * removeActor -> fill real actor_id
 * submitAddActor -> change to new ajax call format + fill real actor_id

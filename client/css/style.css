@@ -49,7 +49,7 @@ h1 {
 *{box-sizing: border-box;}
 
 /* Button used to open the contact form - fixed at the bottom of the page */
-.add_media_button {
+.add_media_button, .add_actor_button {
   background-color: #0C6980;;
   color: white;
   padding: 10px 30px;
@@ -66,13 +66,25 @@ h1 {
 #addMedia_btn_1 {
     top: 23px;
     right: 28px;
-    width: 280px;
+    width: 180px;
 }
 
 #addMedia_btn_2 {
     bottom: 23px;
     right: 28px;
-    width: 280px;
+    width: 180px;
+}
+
+#addActor_btn_1 {
+  top: 23px;
+  right: 240px;
+  width: 180px;
+}
+
+#addActor_btn_2 {
+  bottom: 23px;
+  right: 240px;
+  width: 180px;
 }
 
 /* The popup form - hidden by default */
@@ -110,7 +122,7 @@ h1 {
 
 .div_sort_table {
   position: fixed;
-  top: 7%;
-  right: 26%;
+  top: 6%;
+  right: 30%;
   font-size: 15px;
 }
