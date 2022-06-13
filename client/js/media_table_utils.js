@@ -125,7 +125,7 @@ function BuildTable(sort_kind){
                         '<td>' + object["rating"] + '</td>' +
                         '<td>' + object["date"] + '</td>'+
                         '<td>' + "<button class = \"action_btn\" id = \"" + object["movieId"] + "_updateMedia" + "\" onclick = openUpdateMedia(\""+object["movieId"]+"\") > Update </button>" +
-                        "<br>" + "<button class = \"action_btn\" id = \"" + object["movieId"] + "_addActor" + "\" onclick = openAddActor(\""+object["movieId"]+"\") > Add Actor </button>" +
+                        "<br>" + "<button class = \"action_btn\" id = \"" + object["movieId"] + "_addActorToMedia" + "\" onclick = openAddActorToMedia(\""+object["movieId"]+"\") > Add Actor </button>" +
                         "<br>" + "<button class = \"action_btn\" id = \"" + object["movieId"] + "_viewActors" + "\" onclick = openViewActors(\""+object["movieId"]+"\") > View Actors </button>" +
                         "<br>" + "<button class = \"action_btn\" id = \"" + object["movieId"] + "\" onclick = removeMedia(\""+object["movieId"]+"\") > Remove Media </button>" + "</td>";
 
@@ -550,6 +550,7 @@ function submitAddMedia(){
 
 function submitAddActor()
 {
+
     // Set validation restrictions for the form
     $("form[id='actor_form']").validate({
         
@@ -601,18 +602,18 @@ function submitAddActor()
 
 function submitAddActorToMedia()
 {
-    /*
+       /*
+        new verstion to add actor to media 
+    let media = mediaData.find(x => x.movieId === curr_update_media_id);
+    let media_id = media._id;
+
     $.ajax({
         type: 'PUT', 
           url: '/actor/'+curr_update_media_id, 
           contentType: 'application/json',
           data: JSON.stringify({
-            "movie_id": curr_update_media_id,
-            "actorDetails":{
-              "name": $("#actor_name_field").val(),
-              "picture": $("#actor_pic_url_field").val(),
-              "site" : $("#actor_page_url_field").val(),
-              }
+            "movie_id": media_id,
+            "actor_id": "62a78597ff88114b68609b24" // todo 
           }),
           processData: false,            
           encode: true,
@@ -626,7 +627,9 @@ function submitAddActorToMedia()
             alert("actor not updated!");
         }
       });
-      */
+      
+        */
+       
 }
 
 function submitUpdateMedia(){
