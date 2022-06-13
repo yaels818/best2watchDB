@@ -106,15 +106,15 @@ function BuildTable(sort_kind){
 
         var tbody = document.createElement('tbody');
         var tr = document.createElement('tr');
-        tr.innerHTML =  '<td>' + object["id?"] + '</td>' +
+        tr.innerHTML =  '<td>' + object["movieId"] + '</td>' +
                         '<td>' + object["name"] + '</td>' +
                         '<td>' + '<img src = "' + object["picture"] + '"/img>' + '</td>' +
                         '<td>' + object["rating"] + '</td>' +
                         '<td>' + object["date"] + '</td>'+
-                        '<td>' + "<button class = \"action_btn\" id = \"" + object["id?"] + "_updateMedia" + "\" onclick = openUpdateMedia(\""+object["id?"]+"\") > Update </button>" +
-                        "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "_addActor" + "\" onclick = openAddActor(\""+object["id?"]+"\") > Add Actor </button>" +
-                        "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "_viewActors" + "\" onclick = openViewActors(\""+object["id?"]+"\") > View Actors </button>" +
-                        "<br>" + "<button class = \"action_btn\" id = \"" + object["id?"] + "\" onclick = removeMedia(\""+object["id?"]+"\") > Remove Media </button>" + "</td>";
+                        '<td>' + "<button class = \"action_btn\" id = \"" + object["movieId"] + "_updateMedia" + "\" onclick = openUpdateMedia(\""+object["movieId"]+"\") > Update </button>" +
+                        "<br>" + "<button class = \"action_btn\" id = \"" + object["movieId"] + "_addActor" + "\" onclick = openAddActor(\""+object["movieId"]+"\") > Add Actor </button>" +
+                        "<br>" + "<button class = \"action_btn\" id = \"" + object["movieId"] + "_viewActors" + "\" onclick = openViewActors(\""+object["movieId"]+"\") > View Actors </button>" +
+                        "<br>" + "<button class = \"action_btn\" id = \"" + object["movieId"] + "\" onclick = removeMedia(\""+object["movieId"]+"\") > Remove Media </button>" + "</td>";
 
         tbody.appendChild(tr);
         table.appendChild(tbody);
@@ -170,7 +170,7 @@ function openUpdateMedia(media_id){
     $("select").attr("disabled", true);
 
     curr_update_media_id = media_id;
-    let media = mediaData.find(x => x[Object.keys(x)[0]] === media_id);
+    let media = mediaData.find(x => x.movieId === media_id);
 
     // Convert needed fields from json format
     var date = media.date.split("-").reverse().join("-");
@@ -291,7 +291,7 @@ function validateAddMedia(){
 
     // Check if media_id already exists in JSON
     mediaData.forEach(function (object) {
-        if (object["id?"] == media_id)
+        if (object["movieId"] == media_id)
             alert("Another media with the same ID already exists.\n" +
                     "Please pick another ID.");
             return false;
@@ -569,15 +569,16 @@ function submitUpdateMedia(){
         } 
     }
     
+    let media = mediaData.find(x => x.movieId === curr_update_media_id);
+
     // process the form
     $.ajax({
         type: 'PUT', 
         url: '/movie/'+curr_update_media_id, 
         contentType: 'application/json',
         data: JSON.stringify({
-            "movie_id": curr_update_media_id,
+            "movie_id": media._id,
             "movieDetails":{
-            "movieId": curr_update_media_id,
             "name": $("#update_name_field").val(),
             "picture": $("#update_pic_url_field").val(),
             "director": $("#update_director_field").val(),
@@ -602,6 +603,36 @@ function submitUpdateMedia(){
 
 function submitAddActor()
 {
+   /*
+    let media = mediaData.find(x => x.movieId === curr_update_media_id);
+    let media_id = media._id;
+
+    $.ajax({
+        type: 'PUT', 
+          url: '/actor/'+curr_update_media_id, 
+          contentType: 'application/json',
+          data: JSON.stringify({
+            "movie_id": media_id,
+            "actor_id": "62a78597ff88114b68609b24" // todo 
+          }),
+          processData: false,            
+          encode: true,
+        success: function( data, textStatus, jQxhr ){
+            //console.log(data);
+            alert("actor updated!");
+            closeAddActor();
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+            alert("actor not updated!");
+        }
+      });
+      
+        */
+
+
+
+
     // Set validation restrictions for the form
     $("form[id='actor_form']").validate({
         
@@ -653,12 +684,13 @@ function submitAddActor()
 //--------------------------------------------------------------------------------
 function removeMedia(media_id)
 {
-    let media = mediaData.find(x => x[Object.keys(x)[0]] === media_id);
+    //let media = mediaData.find(x => x[Object.keys(x)[0]] === media_id);
+    let media = mediaData.find(x => x.movieId === media_id);
 
     if (confirm('Are you sure you want to delete '+ media.name +'?')) {
         $.ajax({
             type: 'DELETE', // define the type of HTTP verb we want to use (POST for our form)
-              url: '/movie/'+ media_id, // the url where we want to POST
+              url: '/movie/'+ media._id, // the url where we want to POST
               contentType: 'application/json',
             success: function (result) {
                 alert("media deleted");
@@ -675,13 +707,17 @@ function removeMedia(media_id)
 
 function removeActor(actor_name)
 {
+    let media = mediaData.find(x => x.movieId === curr_update_media_id);
+    let media_id = media._id;
+
     if (confirm('Are you sure you want to delete '+ actor_name +'?')) {
         $.ajax({
             type: 'DELETE', // define the type of HTTP verb we want to use (POST for our form)
             url: '/actor/'+curr_update_media_id, // the url where we want to POST
             contentType: 'application/json',
             data: JSON.stringify({
-                "actorName": actor_name,
+                "actor_id": "62a75cba2c8b5cf06ff1a787",// TODO - fill with real actor_id
+                "movie_id": media_id,
             }),
             success: function (result) {
                 alert("actor deleted");
@@ -693,4 +729,35 @@ function removeActor(actor_name)
           });
       } 
       else {}
+}
+
+
+/////////////////////////
+
+function submitNewActor()
+{
+
+    $.ajax({
+        type: 'POST', 
+          url: '/actor', 
+          contentType: 'application/json',
+          data: JSON.stringify({
+            "actorDetails":{
+              "name": $("#actor_name_field").val(),
+              "picture": $("#actor_pic_url_field").val(),
+              "site" : $("#actor_page_url_field").val(),
+              }
+          }),
+          processData: false,            
+          encode: true,
+        success: function( data, textStatus, jQxhr ){
+            //console.log(data);
+            alert("new actor added!");
+            closeAddActor();
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+            alert("actor not added!");
+        }
+      });
 }
