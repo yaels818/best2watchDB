@@ -5,14 +5,15 @@ SERVER:
 
 CLIENT:
 --------
-* add new actor form
-* add actor to media from drop down list
 * removeActor -> fill real actor_id
 * submitAddActor -> change to new ajax call format + fill real actor_id
-* add actor form - > need to call submitNewActor (the function is in the buttom of the media_table_utils file)
-* add actor to media from drop down list -> to get all actors create new ajax call same like GetList() and change the url to /getActors 
 
 
 DONE:
 * connection to DB 
 * 2 functions
+* add new actor form
+* add actor to media from drop down list
+* add actor form - > need to call submitNewActor (the function is in the buttom of the media_table_utils file)
+* add actor to media from drop down list -> to get all actors create new ajax call 
+                                            same like GetList() and change the url to /getActors 

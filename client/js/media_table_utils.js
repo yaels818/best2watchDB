@@ -1,5 +1,6 @@
 let mediaData;
 let curr_update_media_id;
+let actorsData;
 
 $(document).ready(function () {
 
@@ -8,7 +9,6 @@ $(document).ready(function () {
     $("#addMedia_btn_2").click(openAddMedia);
     $("#close_btn").click(closeAddMedia);
     
-
     $("#addActor_btn_1").click(openAddActor);
     $("#addActor_btn_2").click(openAddActor);
     $("#actor_close_btn").click(closeAddActor);
@@ -50,7 +50,7 @@ $(document).ready(function () {
     });
 });
 
-// Call JSON file
+// Call Media Collection
 function GetList()
 {
     $.ajax({
@@ -58,6 +58,23 @@ function GetList()
         async: false,
         success: function (result) {
             mediaData = result;
+            console.log(result);
+        },
+        error: function (err) {
+          console.log("err", err);
+        }
+    });
+
+}
+
+// Call Actors Collection
+function GetActors()
+{
+    $.ajax({
+        url: "/getActors",
+        async: false,
+        success: function (result) {
+            actorsData = result;
             console.log(result);
         },
         error: function (err) {
@@ -233,6 +250,12 @@ function openAddActorToMedia(media_id){
     // Disable action buttons while media pop-up window is open
     $("button.action_btn").attr("disabled", true);
     $("#sorts_list").attr("disabled", true);
+
+    GetActors();
+
+    actorsData.forEach(function(object) {
+        $("#actors_list").append("<option value=" + object["_id"] + ">" + object["name"] + "</option>");                 
+    });
 }
 
 function openViewActors(media_id)
@@ -575,6 +598,31 @@ function submitAddActor()
     //-------------------------------------------
 
     $.ajax({
+        type: 'POST', 
+          url: '/actor', 
+          contentType: 'application/json',
+          data: JSON.stringify({
+            "actorDetails":{
+              "name": $("#actor_name_field").val(),
+              "picture": $("#actor_pic_url_field").val(),
+              "site" : $("#actor_page_url_field").val(),
+              }
+          }),
+          processData: false,            
+          encode: true,
+        success: function( data, textStatus, jQxhr ){
+            //console.log(data);
+            alert("new actor added!");
+            closeAddActor();
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+            alert("actor not added!");
+        }
+    });
+    
+    /*
+    $.ajax({
         type: 'PUT', 
           url: '/actor/'+curr_update_media_id, 
           contentType: 'application/json',
@@ -597,26 +645,35 @@ function submitAddActor()
             console.log(errorThrown);
             alert("actor not updated!");
         }
-      });
+      });*/
 }
 
 function submitAddActorToMedia()
 {
-       /*
-        new verstion to add actor to media 
     let media = mediaData.find(x => x.movieId === curr_update_media_id);
-    let media_id = media._id;
+    let actor_id = $("#actors_list").val(); // chosen actor from list
+    let actors_in_media = media.actors;     // existing actors in media
+
+    actors_in_media.push(actor_id);         // add new actor to existing
 
     $.ajax({
         type: 'PUT', 
-          url: '/actor/'+curr_update_media_id, 
-          contentType: 'application/json',
-          data: JSON.stringify({
-            "movie_id": media_id,
-            "actor_id": "62a78597ff88114b68609b24" // todo 
-          }),
-          processData: false,            
-          encode: true,
+        url: '/movie/'+curr_update_media_id, 
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "movie_id": media._id,
+            "movieDetails":{
+            "name": media.name,
+            "picture": media.picture,
+            "director": media.director,
+            "date": media.date,
+            "rating": media.rating,
+            "isSeries": media.isSeries,
+            "series_details" : media.series_details,
+            "actors": actors_in_media
+            }}),
+        processData: false,            
+        encode: true,
         success: function( data, textStatus, jQxhr ){
             //console.log(data);
             alert("actor updated!");
@@ -627,9 +684,6 @@ function submitAddActorToMedia()
             alert("actor not updated!");
         }
       });
-      
-        */
-       
 }
 
 function submitUpdateMedia(){
@@ -768,35 +822,4 @@ function removeActor(actor_name)
           });
       } 
       else {}
-}
-
-
-/////////////////////////
-
-function submitNewActor()
-{
-
-    $.ajax({
-        type: 'POST', 
-          url: '/actor', 
-          contentType: 'application/json',
-          data: JSON.stringify({
-            "actorDetails":{
-              "name": $("#actor_name_field").val(),
-              "picture": $("#actor_pic_url_field").val(),
-              "site" : $("#actor_page_url_field").val(),
-              }
-          }),
-          processData: false,            
-          encode: true,
-        success: function( data, textStatus, jQxhr ){
-            //console.log(data);
-            alert("new actor added!");
-            closeAddActor();
-        },
-        error: function (jqXhr, textStatus, errorThrown) {
-            console.log(errorThrown);
-            alert("actor not added!");
-        }
-      });
 }

@@ -213,20 +213,18 @@
     </div>
 
     <div id="div_add_actor_to_media_form"  class="form-popup">
-        <form id="add_actor_to_media_form"  class="form-container" method="POST">
+        <form id="add_actor_to_media_form"  class="form-container" method="PUT">
             
             <h1> Add Actor To Media </h1>
             
             <div id="actors-group" class="form-group">
                 <label for="actors">Which actor would you like to add?</label>
                 <select class="form-control" id="actors_list">
-                    <option value="name_asc">Name - Ascending </option>
-                    <option value="name_dec">Name - Descending</option>
                 </select>
             </div>
 
             <br>
-            <button id = "add_btn" type="submit" class="btn_add">Add </button>
+            <button id = "add_actor_to_media_btn" type="submit" class="btn_add">Add </button>
             <button id = "add_actor_to_media_close_btn" class = "btn_close">close</button>
 
         </form>
