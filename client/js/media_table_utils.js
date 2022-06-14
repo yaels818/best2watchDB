@@ -283,7 +283,7 @@ function openViewActors(media_id)
                 tr.innerHTML =  '<td>' + value["name"] + '</td>' +
                                 '<td>' + '<img src = "' + value["picture"] + '"/img>' + '</td>' +
                                 '<td>' + value["site"] + '</td>' +
-                                '<td>'+ "<button id = \"" + media_id + "_" + value["name"] + "_removeActor" + "\" onclick = removeActor(\""+value["name"]+"\") > delete </button></td>";
+                                '<td>'+ "<button id = \"" + media_id + "_" + value["name"] + "_removeActor" + "\" onclick = removeActor(\""+value["_id"]+"\") > delete </button></td>";
         
                 table.appendChild(tr);
             }); 
@@ -789,19 +789,23 @@ function removeMedia(media_id)
     
 }
 
-function removeActor(actor_name)
+function removeActor(actor_id)
 {
+    GetActors();
     let media = mediaData.find(x => x.movieId === curr_update_media_id);
-    let actor_id = $("#actors_list").val(); // chosen actor from list
+    let actor = actorsData.find(x => x._id === actor_id)
 
-    if (confirm('Are you sure you want to delete '+ actor_name +'?')) {
+    console.log(actor_id);
+    console.log(actor);
+
+    if (confirm('Are you sure you want to delete '+ actor.name +'?')) {
         $.ajax({
-            type: 'DELETE', // define the type of HTTP verb we want to use (POST for our form)
-            url: '/actor/'+curr_update_media_id, // the url where we want to POST
+            type: 'DELETE', // define the type of HTTP verb we want to use
+            url: '/actor/'+curr_update_media_id, // the url where we want to DELETE
             contentType: 'application/json',
             data: JSON.stringify({
                 "movie_id": media._id,
-                "actor_id": actor_id
+                "actor_id": actor._id
             }),
             success: function (result) {
                 alert("actor deleted");
