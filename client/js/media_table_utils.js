@@ -277,14 +277,13 @@ function openViewActors(media_id)
         url: "/list/"+media_id,
         success: function (result) {
 
-            let actors = result.actors;
-
+            let actors = result[0]["actors"];
             $.each(actors, function(index, value) {
                 var tr = document.createElement('tr');
-                tr.innerHTML =  '<td>' + value["name?"] + '</td>' +
+                tr.innerHTML =  '<td>' + value["name"] + '</td>' +
                                 '<td>' + '<img src = "' + value["picture"] + '"/img>' + '</td>' +
-                                '<td>' + '<img src = "' + value["site"] + '"/img>' + '</td>' +
-                                '<td>'+ "<button id = \"" + media_id + "_" + value["name?"] + "_removeActor" + "\" onclick = removeActor(\""+value["name?"]+"\") > delete </button></td>";
+                                '<td>' + value["site"] + '</td>' +
+                                '<td>'+ "<button id = \"" + media_id + "_" + value["name"] + "_removeActor" + "\" onclick = removeActor(\""+value["name"]+"\") > delete </button></td>";
         
                 table.appendChild(tr);
             }); 
@@ -652,26 +651,18 @@ function submitAddActorToMedia()
 {
     let media = mediaData.find(x => x.movieId === curr_update_media_id);
     let actor_id = $("#actors_list").val(); // chosen actor from list
-    let actors_in_media = media.actors;     // existing actors in media
+    //let actors_in_media = media.actors;     // existing actors in media
 
-    actors_in_media.push(actor_id);         // add new actor to existing
+    //actors_in_media.push(actor_id);         // add new actor to existing
 
     $.ajax({
         type: 'PUT', 
-        url: '/movie/'+curr_update_media_id, 
+        url: '/actor/'+curr_update_media_id, 
         contentType: 'application/json',
         data: JSON.stringify({
             "movie_id": media._id,
-            "movieDetails":{
-            "name": media.name,
-            "picture": media.picture,
-            "director": media.director,
-            "date": media.date,
-            "rating": media.rating,
-            "isSeries": media.isSeries,
-            "series_details" : media.series_details,
-            "actors": actors_in_media
-            }}),
+            "actor_id": actor_id
+            }),
         processData: false,            
         encode: true,
         success: function( data, textStatus, jQxhr ){
@@ -801,7 +792,7 @@ function removeMedia(media_id)
 function removeActor(actor_name)
 {
     let media = mediaData.find(x => x.movieId === curr_update_media_id);
-    let media_id = media._id;
+    let actor_id = $("#actors_list").val(); // chosen actor from list
 
     if (confirm('Are you sure you want to delete '+ actor_name +'?')) {
         $.ajax({
@@ -809,8 +800,8 @@ function removeActor(actor_name)
             url: '/actor/'+curr_update_media_id, // the url where we want to POST
             contentType: 'application/json',
             data: JSON.stringify({
-                "actor_id": "62a75cba2c8b5cf06ff1a787",// TODO - fill with real actor_id
-                "movie_id": media_id,
+                "movie_id": media._id,
+                "actor_id": actor_id
             }),
             success: function (result) {
                 alert("actor deleted");

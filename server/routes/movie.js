@@ -243,7 +243,7 @@ module.exports = {
                 function callback (err, numAffected) {
                     if(!err)
                     {
-                        res.status(200).send(`actor:${actorId} in moives id:${movieId} updated`)
+                        res.status(200).send(`actor:${actorId} in movies id:${movieId} updated`)
                         return;
                     }
                     else

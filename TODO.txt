@@ -2,12 +2,10 @@ SERVER:
 --------
 * mongoose validations
 * getMovie - > fill actor 
+* submitAddActor -> ajax call happens also when pressing "close"
 
 CLIENT:
 --------
-* removeActor -> fill real actor_id
-* submitAddActor -> change to new ajax call format + fill real actor_id
-
 
 DONE:
 * connection to DB 
@@ -17,3 +15,6 @@ DONE:
 * add actor form - > need to call submitNewActor (the function is in the buttom of the media_table_utils file)
 * add actor to media from drop down list -> to get all actors create new ajax call 
                                             same like GetList() and change the url to /getActors 
+* submitAddActor -> change to new ajax call format + fill real actor_id
+* removeActor -> fill real actor_id
+* view actors in media
