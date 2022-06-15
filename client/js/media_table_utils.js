@@ -253,7 +253,7 @@ function openAddActorToMedia(media_id){
 
     GetActors();
 
-    var dropdown=$('#actors_list').empty(); 
+    $('#actors_list').empty(); 
 
     actorsData.forEach(function(object) {
         $("#actors_list").append("<option value=" + object["_id"] + ">" + object["name"] + "</option>");                 
@@ -653,10 +653,7 @@ function submitAddActorToMedia()
 {
     let media = mediaData.find(x => x.movieId === curr_update_media_id);
     let actor_id = $("#actors_list").val(); // chosen actor from list
-    //let actors_in_media = media.actors;     // existing actors in media
-
-    //actors_in_media.push(actor_id);         // add new actor to existing
-
+    
     $.ajax({
         type: 'PUT', 
         url: '/actor/'+curr_update_media_id, 
@@ -670,13 +667,14 @@ function submitAddActorToMedia()
         success: function( data, textStatus, jQxhr ){
             //console.log(data);
             alert("actor updated!");
-            closeAddActor();
+            closeAddActorToMedia();
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
             alert("actor not updated!");
         }
-      });
+        });
+    
 }
 
 function submitUpdateMedia(){

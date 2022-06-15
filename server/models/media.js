@@ -5,7 +5,7 @@ var MediaSchema = new mongoose.Schema({
  
     movieId: {
         type: String,
-        required: true
+        required: true,
     },
     name: {
         type: String,
@@ -25,11 +25,14 @@ var MediaSchema = new mongoose.Schema({
     },
     rating: {
         type: Number,
-        required: true
+        required: true,
+        min: [1, 'Rating must be between 1 and 5'],
+        max: [5, 'Rating must be between 1 and 5']
     },
     isSeries: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     },
     series_details: {
         type: Array,
