@@ -1,8 +1,7 @@
 SERVER:
 --------
 * mongoose validations
-* getMovie - > fill actor 
-* submitAddActor -> ajax call happens also when pressing "close"
+
 
 CLIENT:
 --------
@@ -18,3 +17,5 @@ DONE:
 * submitAddActor -> change to new ajax call format + fill real actor_id
 * removeActor -> fill real actor_id
 * view actors in media
+* getMovie - > fill actor 
+* submitAddActor -> ajax call happens also when pressing "close"

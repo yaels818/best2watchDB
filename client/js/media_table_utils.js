@@ -253,6 +253,8 @@ function openAddActorToMedia(media_id){
 
     GetActors();
 
+    var dropdown=$('#actors_list').empty(); 
+
     actorsData.forEach(function(object) {
         $("#actors_list").append("<option value=" + object["_id"] + ">" + object["name"] + "</option>");                 
     });
