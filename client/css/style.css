@@ -97,20 +97,32 @@ h1 {
   overflow-y:scroll;
   z-index:10;
   border: 3px solid #f1f1f1;
+  width: 700px;
 }
 
 /* Add styles to the form container */
 .form-container {
-  max-width: 700px;
-  min-height: 600px;
+  max-width: 100%;
+  min-height: 100%;
   padding: 10px;
   font-family:'Lucida Sans', Verdana, sans-serif;
-  background-color: white;
+  background-color: #C4DBE0;
 }
 
 /* Set a style for the submit/add button */
-.form-container .btn_add {
+.btn_add {
   background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+.btn_close {
+  background-color: #60776f;
   color: white;
   padding: 16px 20px;
   border: none;
@@ -126,3 +138,4 @@ h1 {
   right: 30%;
   font-size: 15px;
 }
+

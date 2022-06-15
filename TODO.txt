@@ -1,10 +1,9 @@
 SERVER:
 --------
-* mongoose validations
-
 
 CLIENT:
 --------
+
 
 DONE:
 * connection to DB 
@@ -19,3 +18,5 @@ DONE:
 * view actors in media
 * getMovie - > fill actor 
 * submitAddActor -> ajax call happens also when pressing "close"
+* mongoose validations
+* fix cosmetics
